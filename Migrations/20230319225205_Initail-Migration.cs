@@ -424,17 +424,13 @@ namespace AlimBio.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Sujet = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DetailsId = table.Column<int>(type: "int", nullable: true),
+                    Details = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     SalarieId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Messages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Messages_Messages_DetailsId",
-                        column: x => x.DetailsId,
-                        principalTable: "Messages",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Messages_Salaries_SalarieId",
                         column: x => x.SalarieId,
@@ -484,11 +480,6 @@ namespace AlimBio.Migrations
                 name: "IX_Entreprises_VilleId",
                 table: "Entreprises",
                 column: "VilleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Messages_DetailsId",
-                table: "Messages",
-                column: "DetailsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_SalarieId",

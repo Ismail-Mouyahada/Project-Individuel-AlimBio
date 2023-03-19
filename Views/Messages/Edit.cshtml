@@ -1,7 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-@model AlimBio.Models.Message
+﻿@model AlimBio.Models.Message
 
 @{
     ViewData["Title"] = "Edit";
@@ -20,6 +17,11 @@
                 <label asp-for="Sujet" class="control-label"></label>
                 <input asp-for="Sujet" class="form-control" />
                 <span asp-validation-for="Sujet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" />
+                <span asp-validation-for="Details" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SalarieId" class="control-label"></label>

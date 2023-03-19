@@ -48,7 +48,7 @@ namespace AlimBio.Controllers.WEB
         // GET: Messages/Create
         public IActionResult Create()
         {
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Id");
+            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Email");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace AlimBio.Controllers.WEB
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Sujet,SalarieId")] Message message)
+        public async Task<IActionResult> Create([Bind("Id,Sujet,Details,SalarieId")] Message message)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace AlimBio.Controllers.WEB
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Id", message.SalarieId);
+            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Email", message.SalarieId);
             return View(message);
         }
 
@@ -91,7 +91,7 @@ namespace AlimBio.Controllers.WEB
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Sujet,SalarieId")] Message message)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Sujet,Details,SalarieId")] Message message)
         {
             if (id != message.Id)
             {

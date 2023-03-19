@@ -16,7 +16,7 @@ namespace AlimBio.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("AlimBio.Models.Entreprise", b =>
@@ -107,8 +107,8 @@ namespace AlimBio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DetailsId")
-                        .HasColumnType("int");
+                    b.Property<string>("Details")
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("SalarieId")
                         .HasColumnType("int");
@@ -117,8 +117,6 @@ namespace AlimBio.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DetailsId");
 
                     b.HasIndex("SalarieId");
 
@@ -507,15 +505,9 @@ namespace AlimBio.Migrations
 
             modelBuilder.Entity("AlimBio.Models.Message", b =>
                 {
-                    b.HasOne("AlimBio.Models.Message", "Details")
-                        .WithMany()
-                        .HasForeignKey("DetailsId");
-
                     b.HasOne("AlimBio.Models.Salarie", "Salarie")
                         .WithMany()
                         .HasForeignKey("SalarieId");
-
-                    b.Navigation("Details");
 
                     b.Navigation("Salarie");
                 });

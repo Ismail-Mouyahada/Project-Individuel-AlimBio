@@ -1,7 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-@model IEnumerable<AlimBio.Models.Message>
+﻿@model IEnumerable<AlimBio.Models.Message>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Sujet)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Salarie)
             </th>
             <th></th>
@@ -29,6 +29,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Sujet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Salarie.Id)
