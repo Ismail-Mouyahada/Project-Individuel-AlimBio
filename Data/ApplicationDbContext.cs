@@ -9,5 +9,13 @@ namespace AlimBio.Data
             : base(options)
         {
         }
+
+        public DbSet<AlimBio.Models.Salarie> Salaries { get; set; }
+        public DbSet<AlimBio.Models.Service> Services { get; set; }
+        public DbSet<AlimBio.Models.Site> Sites { get; set; }
+        public DbSet<AlimBio.Models.Entreprise> Entreprises { get; set; }
+        public DbSet<AlimBio.Models.Ville> Villes { get; set; }
+        public DbSet<AlimBio.Models.Message> Messages { get; set; }
+
     }
 }
