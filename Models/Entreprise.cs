@@ -25,5 +25,9 @@
         public string? InscritRcs { get; set; }
         public string? SiteWeb { get; set; }
         public string? ImmatriculationTva { get; set; }
+
+        public ICollection<Salarie>? Salaries { get; set; }
+        public ICollection<Service>? Services { get; set; }
+        public ICollection<Site>? Sites { get; set; }
     }
 }

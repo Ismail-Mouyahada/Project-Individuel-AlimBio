@@ -13,5 +13,12 @@
         public string? CodePostal { get; set; }
         public string? Ville { get; set; }
         public string? Pays { get; set; }
+
+        public int? ServiceId { get; set; }
+        public Service? Service { get; set; }
+        public int? EntrepriseId { get; set; }
+        public Entreprise? Entreprise { get; set; }
+        public int? SiteId { get; set; }
+        public Site? Site { get; set; }
     }
 }

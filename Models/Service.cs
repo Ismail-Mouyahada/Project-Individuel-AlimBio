@@ -8,5 +8,12 @@
         public string? NomService { get; set; }
         public string? Description { get; set; }
 
+        public int? SiteId { get; set; }
+        public Site? Site { get; set; }
+        public int? EntrepriseId { get; set; }
+        public Entreprise? Entreprise { get; set; }
+
+        public ICollection<Salarie>? Salaries { get; set; }
+
     }
 }
