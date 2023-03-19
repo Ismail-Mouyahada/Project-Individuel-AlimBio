@@ -7,10 +7,24 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Salarie</h4>
-<hr />
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Contact</h2>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Contact</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -95,3 +109,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+</main>

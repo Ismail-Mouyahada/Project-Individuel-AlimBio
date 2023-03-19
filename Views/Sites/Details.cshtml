@@ -6,118 +6,65 @@
 @{
     ViewData["Title"] = "Details";
 }
+<main id="main">
 
-<h1>Details</h1>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
 
-<div>
-    <h4>Site</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Siret)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Siret)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomSite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomSite)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TypeSite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TypeSite)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Statut)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Statut)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreEmployees)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreEmployees)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capital)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capital)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Adresse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Adresse)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Langitude)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Langitude)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Largitude)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Largitude)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Effectif)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Effectif)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateCreation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateCreation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tel)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SiteWeb)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SiteWeb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Entreprise)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Entreprise.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ville)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ville.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Contact</h2>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Contact</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Contact Section ======= -->
+    <div class="map-section">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <section id="contact" class="contact">
+        <div class="container">
+
+            <div class="row justify-content-center" data-aos="fade-up">
+
+                <div class="col-lg-10">
+
+                    <div class="info-wrap">
+                        <div class="row">
+                            <div class="col-lg-4 info">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>Géolocalisation:</h4>
+                                <p> @Html.DisplayFor(model => model.Adresse)<br> @Html.DisplayFor(model => model.Ville.NomVille),  @Html.DisplayFor(model => model.Ville.CodePostal)</p>
+                            </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                                <i class="bi bi-envelope"></i>
+                                <h4>Email:</h4>
+                                <p> @Html.DisplayFor(model => model.Adresse)<br>contact@example.com</p>
+                            </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                                <i class="bi bi-phone"></i>
+                                <h4>Appel:</h4>
+                                <p> @Html.DisplayFor(model => model.Siret) <br> @Html.DisplayFor(model => model.Siret)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <a class="btn btn-orange" asp-action="Edit" asp-route-id="@Model?.Id"><i class="ti ti-pen"></i></a> |
+            <a class="btn btn-orange" asp-action="Index">Précédent</a>
+        </div>
+    </section><!-- End Contact Section -->
+
+</main><!-- End #main -->

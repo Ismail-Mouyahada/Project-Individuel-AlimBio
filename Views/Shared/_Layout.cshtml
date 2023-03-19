@@ -49,17 +49,13 @@
                     <li><a asp-area="" asp-controller="Villes" asp-action="Index">Villes</a></li>
                     <li><a asp-area="" asp-controller="Sites" asp-action="Index">Sites</a></li>
                     <li><a asp-area="" asp-controller="Entreprises" asp-action="Index">Entreprises</a></li>
-
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">Nous-sommes</a></li>
-
+                    <li><a asp-area="" asp-controller="Messages" asp-action="Create">Contact</a></li>
+                    <partial name="_LoginPartial" />
+     
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
-            <div class="header-social-links d-flex">
-                <partial name="_LoginPartial" />
-            </div>
+ 
 
         </div>
     </header><!-- End Header -->

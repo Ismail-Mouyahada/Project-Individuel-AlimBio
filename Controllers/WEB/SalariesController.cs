@@ -50,9 +50,9 @@ namespace AlimBio.Controllers.WEB
         // GET: Salaries/Create
         public IActionResult Create()
         {
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id");
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Id");
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id");
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise");
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "NomService");
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite");
             return View();
         }
 
@@ -69,9 +69,9 @@ namespace AlimBio.Controllers.WEB
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id", salarie.EntrepriseId);
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Id", salarie.ServiceId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id", salarie.SiteId);
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", salarie.EntrepriseId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "NomService", salarie.ServiceId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", salarie.SiteId);
             return View(salarie);
         }
 
@@ -88,9 +88,9 @@ namespace AlimBio.Controllers.WEB
             {
                 return NotFound();
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id", salarie.EntrepriseId);
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Id", salarie.ServiceId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id", salarie.SiteId);
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", salarie.EntrepriseId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "NomService", salarie.ServiceId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", salarie.SiteId);
             return View(salarie);
         }
 
@@ -126,9 +126,9 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id", salarie.EntrepriseId);
-            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "Id", salarie.ServiceId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id", salarie.SiteId);
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", salarie.EntrepriseId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "NomService", salarie.ServiceId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", salarie.SiteId);
             return View(salarie);
         }
 

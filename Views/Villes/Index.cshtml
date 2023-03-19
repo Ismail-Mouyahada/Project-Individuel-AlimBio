@@ -6,39 +6,69 @@
 @{
     ViewData["Title"] = "Index";
 }
+<main id="main">
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomVille)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodePostal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomVille)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodePostal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Villes de l'enseigne'</h2>
+                <ol>
+                    <li><a href="#">Villes</a></li>
+                    <li>liste</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section id="contact" class="contact">
+        <div class="container">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-green my-2" asp-action="Create">+ Nouvelle ville</a>
+            }
+            <div class="row justify-content-center" data-aos="fade-up">
+
+
+
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-lg-4">
+
+                        <div class="info-wrap mt-2">
+                            <div class="row">
+                                <div class="col-lg-12 info my-3">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <h4>@Html.DisplayFor(modelItem => item.NomVille)</h4>
+                                    <p> Code Postal : @Html.DisplayFor(modelItem => item.CodePostal)</p>
+
+                                </div>
+                                <div>
+
+                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
+
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
+                                        <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+            </div>
+        </div>
+    </section><!-- End Contact Section -->
+
+</main><!-- End #main -->

@@ -4,158 +4,66 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Siren)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomEntreprise)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescriptionActivite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonneMoral)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SiretSiege)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumeroVoie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LibelleVoie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ComplementAdresse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AdresseComplet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodePostal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ville)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lattitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Langitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntrepriseEmployeuse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capital)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Effectif)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InscritRcs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SiteWeb)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImmatriculationTva)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Siren)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomEntreprise)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionActivite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonneMoral)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SiretSiege)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroVoie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LibelleVoie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ComplementAdresse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdresseComplet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodePostal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ville)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lattitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Langitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntrepriseEmployeuse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capital)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Effectif)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InscritRcs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SiteWeb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImmatriculationTva)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Service</h2>
+                <ol>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Services/details</a></li>
+                    <li>Details de service </li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container" data-aos="fade-up">
+            <a class="btn btn-green" asp-action="Create"> + nouvelle entreprise </a>
+            <div class="row gy-4">
+
+
+                @foreach( var item in Model)
+                {
+                    <div class="col-lg-6">
+                        <div class="portfolio-info">
+                            <h3>Information - Service </h3>
+                            <ul>
+                                <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <a class="btn btn-blue" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
+                                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="portfolio-description">
+                            <h2>Description de service</h2>
+                            <p>
+                                @Html.DisplayNameFor(model => item.AdresseComplet)
+                            </p>
+                        </div>
+                    </div>
+                }
+              
+ 
+            </div>
+
+
+        </div>
+    </section><!-- End   Details Section -->
+
+</main><!-- End #main -->
+ 

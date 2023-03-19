@@ -82,7 +82,7 @@ namespace AlimBio.Controllers.WEB
             {
                 return NotFound();
             }
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Id", message.SalarieId);
+            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Email", message.SalarieId);
             return View(message);
         }
 
@@ -118,7 +118,7 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Id", message.SalarieId);
+            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Email", message.SalarieId);
             return View(message);
         }
 

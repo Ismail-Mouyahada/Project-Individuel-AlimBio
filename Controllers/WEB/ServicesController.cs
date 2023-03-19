@@ -49,8 +49,8 @@ namespace AlimBio.Controllers.WEB
         // GET: Services/Create
         public IActionResult Create()
         {
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id");
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id");
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise");
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace AlimBio.Controllers.WEB
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id", service.EntrepriseId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id", service.SiteId);
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", service.EntrepriseId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", service.SiteId);
             return View(service);
         }
 
@@ -85,8 +85,8 @@ namespace AlimBio.Controllers.WEB
             {
                 return NotFound();
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id", service.EntrepriseId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id", service.SiteId);
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", service.EntrepriseId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", service.SiteId);
             return View(service);
         }
 
@@ -122,8 +122,8 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "Id", service.EntrepriseId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Id", service.SiteId);
+            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", service.EntrepriseId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", service.SiteId);
             return View(service);
         }
 

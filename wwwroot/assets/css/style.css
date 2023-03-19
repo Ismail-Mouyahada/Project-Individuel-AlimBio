@@ -2220,3 +2220,23 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+.btn-orange {
+    color: white !important;
+    background-color: #ffcc3b !important;
+}
+
+.btn-red {
+    color: white !important;
+    background-color: #ff3b5f !important;
+}
+
+.btn-blue {
+    color: white !important;
+    background-color: #863bff !important;
+}
+
+.btn-green {
+    color: white !important;
+    background-color: #21df65  !important;
+}

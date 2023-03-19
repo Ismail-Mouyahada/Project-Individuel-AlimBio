@@ -4,147 +4,75 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<main id="main">
 
-<div>
-    <h4>Entreprise</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Siren)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Siren)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomEntreprise)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomEntreprise)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescriptionActivite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescriptionActivite)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PersonneMoral)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PersonneMoral)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SiretSiege)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SiretSiege)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nic)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nic)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroVoie)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroVoie)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LibelleVoie)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LibelleVoie)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ComplementAdresse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ComplementAdresse)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AdresseComplet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdresseComplet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodePostal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodePostal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ville)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ville)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Region)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Region)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lattitude)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lattitude)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Langitude)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Langitude)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateCreation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateCreation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EntrepriseEmployeuse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EntrepriseEmployeuse)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capital)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capital)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Effectif)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Effectif)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InscritRcs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InscritRcs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SiteWeb)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SiteWeb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImmatriculationTva)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImmatriculationTva)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Service</h2>
+                <ol>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Services/details</a></li>
+                    <li>Details de service </li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row gy-4">
+
+
+
+                <div class="col-lg-6">
+                    <div class="portfolio-info">
+                        <h3>Information - Service </h3>
+                        <ul>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a class="btn btn-primary" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-pen text-white"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="portfolio-description">
+                        <h2>Description de service</h2>
+                        <p>
+                            @Html.DisplayNameFor(model => model.Sites.First().Adresse)
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section><!-- End   Details Section -->
+
+</main><!-- End #main -->
+
+ 
+ 
