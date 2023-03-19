@@ -25,10 +25,10 @@ namespace AlimBio.Controllers.REST
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entreprise>>> GetEntreprises()
         {
-          if (_context.Entreprises == null)
-          {
-              return NotFound();
-          }
+            if (_context.Entreprises == null)
+            {
+                return NotFound();
+            }
             return await _context.Entreprises.ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace AlimBio.Controllers.REST
         [HttpGet("{id}")]
         public async Task<ActionResult<Entreprise>> GetEntreprise(int id)
         {
-          if (_context.Entreprises == null)
-          {
-              return NotFound();
-          }
+            if (_context.Entreprises == null)
+            {
+                return NotFound();
+            }
             var entreprise = await _context.Entreprises.FindAsync(id);
 
             if (entreprise == null)
@@ -86,10 +86,10 @@ namespace AlimBio.Controllers.REST
         [HttpPost]
         public async Task<ActionResult<Entreprise>> PostEntreprise(Entreprise entreprise)
         {
-          if (_context.Entreprises == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Entreprises'  is null.");
-          }
+            if (_context.Entreprises == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Entreprises'  is null.");
+            }
             _context.Entreprises.Add(entreprise);
             await _context.SaveChangesAsync();
 
