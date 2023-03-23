@@ -32,7 +32,7 @@
                 <h2>Notre<strong>Equipe</strong></h2>
                 <p>retrouvez la liste des nos salariés , ils sont tous à votre dispositions pour les moindre question !</p>
             </div>
-            <div class="row">
+            <div class="d-flex gap-2">
                 @foreach (var item in Model)
                 {
                     <a asp-controller="Salaries" asp-action="details" asp-route-id="@item.Id">
@@ -57,7 +57,7 @@
                                     {
                                         <div class="my-3">
                                             <a class="btn btn-orange" asp-controller="Salaries" asp-action="edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
-                                            <a class="btn btn-red" asp-controller="Salaries" asp-action="delate" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                                            <a class="btn btn-red" asp-controller="Salaries" asp-action="delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
                                         </div>
                                     }
 

@@ -6,71 +6,65 @@
 @{
     ViewData["Title"] = "Index";
 }
-<main id="main">
 
+
+
+<main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
-
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Sites</h2>
+                <h2>Service</h2>
                 <ol>
-                    <li><a href="">Liste</a></li>
-                    <li>Sites</li>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Services/details</a></li>
+                    <li>Details de service </li>
                 </ol>
             </div>
-
         </div>
     </section><!-- End Breadcrumbs -->
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-
-
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
         <div class="container" data-aos="fade-up">
-            <a class="btn btn-green my-4" asp-action="Create">+ nouveau site</a>
-            <div class="row">
-
+            <a class="btn btn-green my-2" asp-action="Create"> + nouvelle entreprise </a>
+            <div class="row gy-4">
                 @foreach (var item in Model)
                 {
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="box">
-                            <h3>Free</h3>
-                            <h4><sup></sup>0<span> / month</span></h4>
+                    <div class="col-lg-6">
+                        <div class="portfolio-info">
+                            <h3>Information - Service </h3>
                             <ul>
-
-                                <li> @Html.DisplayFor(modelItem => item.NomSite)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Siret)</li>
-                                <li> @Html.DisplayFor(modelItem => item.TypeSite)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Email)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Tel)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Description)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Capital)</li>
-                                <li> @Html.DisplayFor(modelItem => item.SiteWeb)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Statut)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Adresse)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Ville)</li>
-                                <li> @Html.DisplayFor(modelItem => item.Effectif)</li>
-                                <li> @Html.DisplayFor(modelItem => item.NombreEmployees)</li>
-
-
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.NomSite)     </b> :  @Html.DisplayFor(modelItem => item.NomSite)     </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Siret)       </b> :  @Html.DisplayFor(modelItem => item.Siret)       </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.TypeSite)    </b> :  @Html.DisplayFor(modelItem => item.TypeSite)    </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Email)       </b> :  @Html.DisplayFor(modelItem => item.Email)       </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Tel)         </b> :  @Html.DisplayFor(modelItem => item.Tel)         </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Description) </b> :  @Html.DisplayFor(modelItem => item.Description) </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Capital)     </b> :  @Html.DisplayFor(modelItem => item.Capital)     </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.SiteWeb)     </b> :  @Html.DisplayFor(modelItem => item.SiteWeb)     </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Statut)      </b> :  @Html.DisplayFor(modelItem => item.Statut)      </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Adresse)     </b> :  @Html.DisplayFor(modelItem => item.Adresse)     </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Ville)       </b> :  @Html.DisplayFor(modelItem => item.Ville)       </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Effectif)    </b> :  @Html.DisplayFor(modelItem => item.Effectif)    </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.NombreEmployees) </b> :  @Html.DisplayFor(modelItem => item.NombreEmployees)</li>
                             </ul>
-                            <div class="btn-wrap">
-                                <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
+                            <ul>
+                                <li>
+                                    <a class="btn btn-blue" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
+                                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pen"></i></a>
+                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
 
-                                @* @if (SignInManager.IsSignedIn(User))
-                            {*@
-                                <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
-                                <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
-                                @* }*@
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    
                 }
-
-
             </div>
-
         </div>
-    </section><!-- End Pricing Section -->
-</main>
+    </section><!-- End   Details Section -->
+
+</main><!-- End #main -->
+
+ 

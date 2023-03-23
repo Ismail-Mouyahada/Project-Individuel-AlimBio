@@ -7,34 +7,62 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<main id="main">
 
-<h4>Ville</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NomVille" class="control-label"></label>
-                <input asp-for="NomVille" class="form-control" />
-                <span asp-validation-for="NomVille" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CodePostal" class="control-label"></label>
-                <input asp-for="CodePostal" class="form-control" />
-                <span asp-validation-for="CodePostal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Entreprise</h2>
+                <ol>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Entreprises/details</a></li>
+                    <li>Details d'entreprise </li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container" data-aos="fade-up">
+            <div class="row gy-4">
+                <div class="col-lg-6">
+                    <div class="portfolio-info">
+                        <h3>Creation - Ville </h3>
+
+
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="NomVille" class="control-label"></label>
+                                <input asp-for="NomVille" class="form-control" />
+                                <span asp-validation-for="NomVille" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CodePostal" class="control-label"></label>
+                                <input asp-for="CodePostal" class="form-control" />
+                                <span asp-validation-for="CodePostal" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Soumettre" class="btn btn-green my-2" />
+                            </div>
+                        </form>
+                         
+                        <div>
+                            <a class="btn btn-green my-2" asp-action="Index"> <i class="fa fa-arrow-left"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End   Details Section -->
+
+</main><!-- End #main -->
+
+ 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

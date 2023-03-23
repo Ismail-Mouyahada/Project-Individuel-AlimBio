@@ -11,11 +11,11 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Service</h2>
+                <h2>Entreprise</h2>
                 <ol>
                     <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Services/details</a></li>
-                    <li>Details de service </li>
+                    <li><a href="#">Entreprises/details</a></li>
+                    <li>Details d'entreprise </li>
                 </ol>
             </div>
 
@@ -31,27 +31,27 @@
 
                 <div class="col-lg-6">
                     <div class="portfolio-info">
-                        <h3>Information - Service </h3>
+                        <h3>Information - Entreprise </h3>
+
                         <ul>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                            <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
-                        </ul>
-                        <ul>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayFor(model => model.NomEntreprise)</li>
+                            <li><strong>Effectif</strong>:  @Html.DisplayFor(model => model.Capital)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayFor(model => model.Effectif)</li>
+                            <li><strong>Entreprise Employeuse</strong>:  @Html.DisplayFor(model => model.EntrepriseEmployeuse) </li>
+                            <li><strong>N° TVA</strong>:  @Html.DisplayFor(model => model.ImmatriculationTva)</li>
+                            <li><strong>SIREN</strong>:  @Html.DisplayFor(model => model.Siren)</li>
+                            <li><strong>Ville</strong>:  @Html.DisplayFor(model => model.Ville)</li>
+                            <li><strong>Adresse complete</strong>:  @Html.DisplayFor(model => model.AdresseComplet)</li>
+                            <li><strong>Code Postal</strong>:  @Html.DisplayFor(model => model.CodePostal)</li>
+                            <li><strong>Date Création </strong>:  @Html.DisplayFor(model => model.DateCreation)</li>
+                            <li><strong>Description D'activité'</strong>:  @Html.DisplayFor(model => model.DescriptionActivite)</li>
+                            <li><strong>Nom de service</strong>:  @Html.DisplayFor(model => model.Langitude)</li>
+                         
+                            
+
                             <li>
-                                <a class="btn btn-primary" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
-                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-pen text-white"></i></a>
+                                <a class="btn btn-green" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
+                                <a class="btn btn-orange" asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-pen text-white"></i></a>
                             </li>
 
                         </ul>

@@ -6,11 +6,9 @@
 
 
 <main id="main">
-
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
-
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Service</h2>
                 <ol>
@@ -19,16 +17,13 @@
                     <li>Details de service </li>
                 </ol>
             </div>
-
         </div>
     </section><!-- End Breadcrumbs -->
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
         <div class="container" data-aos="fade-up">
-            <a class="btn btn-green" asp-action="Create"> + nouvelle entreprise </a>
+            <a class="btn btn-green my-2" asp-action="Create"> + nouvelle entreprise </a>
             <div class="row gy-4">
-
-
                 @foreach( var item in Model)
                 {
                     <div class="col-lg-6">
@@ -40,9 +35,9 @@
                             <ul>
                                 <li>
                                     <a class="btn btn-blue" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
-                                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                    <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pen"></i></a> 
+                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a> 
+                                    <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
                                     
                                 </li>
                             </ul>
@@ -57,11 +52,7 @@
                         </div>
                     </div>
                 }
-              
- 
             </div>
-
-
         </div>
     </section><!-- End   Details Section -->
 
