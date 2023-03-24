@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlimBio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230319225205_Initail-Migration")]
-    partial class InitailMigration
+    [Migration("20230324223325_Intial-Migration")]
+    partial class IntialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -526,7 +526,7 @@ namespace AlimBio.Migrations
                         .HasForeignKey("ServiceId");
 
                     b.HasOne("AlimBio.Models.Site", "Site")
-                        .WithMany()
+                        .WithMany("Salaries")
                         .HasForeignKey("SiteId");
 
                     b.HasOne("AlimBio.Models.Ville", null)
@@ -631,6 +631,11 @@ namespace AlimBio.Migrations
                 });
 
             modelBuilder.Entity("AlimBio.Models.Service", b =>
+                {
+                    b.Navigation("Salaries");
+                });
+
+            modelBuilder.Entity("AlimBio.Models.Site", b =>
                 {
                     b.Navigation("Salaries");
                 });

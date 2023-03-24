@@ -20,12 +20,20 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Salaries
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Salaries.Include(s => s.Entreprise).Include(s => s.Service).Include(s => s.Site);
-            return View(await applicationDbContext.ToListAsync());
-        }
+       
 
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var salaries = from s in _context.Salaries
+                select s;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                salaries = salaries.Where(s => s.Nom.Contains(searchString)
+                                               || s.Prenom.Contains(searchString) || s.Email.Contains(searchString));
+            }
+            return View(await salaries.ToListAsync());
+        }
         // GET: Salaries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -144,6 +152,7 @@ namespace AlimBio.Controllers.WEB
                 .Include(s => s.Entreprise)
                 .Include(s => s.Service)
                 .Include(s => s.Site)
+                .Include(s => s.Poste)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (salarie == null)
             {

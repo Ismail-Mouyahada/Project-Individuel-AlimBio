@@ -23,5 +23,7 @@
         public Entreprise? Entreprise { get; set; }
         public int? VilleId { get; set; }
         public Ville? Ville { get; set; }
+
+        public ICollection<Salarie>? Salaries { get; set; }
     }
 }

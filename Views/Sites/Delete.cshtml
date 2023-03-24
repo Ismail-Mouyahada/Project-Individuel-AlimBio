@@ -124,3 +124,14 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <span>@error.ErrorMessage</span>
+
+            <br />
+        }
+    </div>
+}

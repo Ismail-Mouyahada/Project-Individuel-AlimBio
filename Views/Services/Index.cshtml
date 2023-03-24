@@ -25,7 +25,7 @@
     <!-- ======= Services Section ======= -->
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
-
+   
             <div class="row">
 
                 @foreach (var item in Model)
@@ -40,6 +40,7 @@
                             <h4><a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.NomService)</a></h4>
                             <p class="text-black m-2 py-2 text-center">@Html.DisplayFor(modelItem => item.Description)</p>
                             <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" class="btn btn-green "><i class="text-white fas fa-eye"></i></a>
+                            
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 <div class="my-2">
