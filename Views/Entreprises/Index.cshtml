@@ -1,4 +1,7 @@
-﻿@model IEnumerable<AlimBio.Models.Entreprise>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<AlimBio.Models.Entreprise>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,11 +13,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Service</h2>
+                <h2>Entreprise</h2>
                 <ol>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Services/details</a></li>
-                    <li>Details de service </li>
+                    <li><a href="#">Entreprises</a></li>
+                    <li><a href="#">Liste des entreprises</a></li>
                 </ol>
             </div>
         </div>
@@ -34,10 +36,14 @@
                             </ul>
                             <ul>
                                 <li>
-                                    <a class="btn btn-blue" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
-                                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pen"></i></a> 
-                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a> 
-                                    <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+
+                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
+
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
+                                        <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                                    }
                                     
                                 </li>
                             </ul>

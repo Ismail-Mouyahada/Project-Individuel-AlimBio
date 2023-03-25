@@ -15,8 +15,8 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Services</h2>
                 <ol>
-                    <li><a asp-controller="Home" asp-action="Index">Accueil</a></li>
-                    <li>Services</li>
+                    <li><a href="#">Liste</a></li>
+                    <li><a href="#">Services</a> </li>
                 </ol>
             </div>
 
@@ -25,6 +25,10 @@
     <!-- ======= Services Section ======= -->
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus"> + Nouvelle Service </i></a>
+            }
    
             <div class="row">
 
@@ -41,15 +45,17 @@
                             <p class="text-black m-2 py-2 text-center">@Html.DisplayFor(modelItem => item.Description)</p>
                             <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" class="btn btn-green "><i class="text-white fas fa-eye"></i></a>
                             
-                            @if (SignInManager.IsSignedIn(User))
-                            {
+ 
                                 <div class="my-2">
+                                <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
 
-                                    <a asp-controller="Services" asp-action="Create" asp-route-id="@item.Id" class="btn btn-success "><i class="text-white fas fa-add"></i></a>
-                                    <a asp-controller="Services" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning  "><i class="text-white fas fa-pen"></i></a>
-                                    <a asp-controller="Services" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger  "><i class="text-white fas fa-trash"></i></a>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
+                                    <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                                }
                                 </div>
-                            }
+ 
                         </div>
                     </div>
                 }

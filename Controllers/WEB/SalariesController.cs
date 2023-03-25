@@ -69,17 +69,31 @@ namespace AlimBio.Controllers.WEB
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie)
+        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.Length > 0)
+                {
+                    byte[] imageData = null;
+
+                    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)file.Length);
+                    }
+
+                    salarie.Image = imageData;
+                }
+
                 _context.Add(salarie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", salarie.EntrepriseId);
             ViewData["ServiceId"] = new SelectList(_context.Services, "Id", "NomService", salarie.ServiceId);
             ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", salarie.SiteId);
+
             return View(salarie);
         }
 

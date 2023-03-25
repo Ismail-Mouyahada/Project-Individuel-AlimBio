@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlimBio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230324223325_Intial-Migration")]
-    partial class IntialMigration
+    [Migration("20230325141405_Initial-Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,6 +146,9 @@ namespace AlimBio.Migrations
 
                     b.Property<string>("Fix")
                         .HasColumnType("longtext");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("Mobile")
                         .HasColumnType("longtext");

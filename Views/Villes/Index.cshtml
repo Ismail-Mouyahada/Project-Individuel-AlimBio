@@ -14,13 +14,15 @@
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
 
+
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Villes de l'enseigne</h2>
+                <h2>Ville</h2>
                 <ol>
+                    <li><a href="#">Liste</a></li>
                     <li><a href="#">Villes</a></li>
-                    <li>liste</li>
                 </ol>
             </div>
+
 
         </div>
     </section><!-- End Breadcrumbs -->
@@ -29,7 +31,7 @@
         <div class="container">
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="btn btn-green my-2" asp-action="Create">+ Nouvelle ville</a>
+                <a class="btn btn-green my-2" asp-action="Create"> + Nouvelle ville</a>
             }
             <div class="row justify-content-center" data-aos="fade-up">
 
@@ -51,6 +53,7 @@
                                 </div>
                                 <div>
 
+                                   
                                     <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
 
                                     @if (SignInManager.IsSignedIn(User))
@@ -65,8 +68,7 @@
                     </div>
                 }
 
-
-
+ 
             </div>
         </div>
     </section><!-- End Contact Section -->

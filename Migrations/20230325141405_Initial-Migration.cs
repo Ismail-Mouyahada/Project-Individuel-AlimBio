@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AlimBio.Migrations
 {
     /// <inheritdoc />
-    public partial class IntialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -385,6 +385,7 @@ namespace AlimBio.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Pays = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Image = table.Column<byte[]>(type: "longblob", nullable: true),
                     ServiceId = table.Column<int>(type: "int", nullable: true),
                     EntrepriseId = table.Column<int>(type: "int", nullable: true),
                     SiteId = table.Column<int>(type: "int", nullable: true),

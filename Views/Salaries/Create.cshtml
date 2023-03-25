@@ -35,8 +35,12 @@
                         <h3>Creation - Salariés </h3>
 
 
-                        <form asp-action="Create">
+                        <form asp-action="Create" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="image">Image de profil:</label>
+                                <input type="file" class="form-control-file" id="image" name="Image">
+                            </div>
                             <div class="form-group">
                                 <label asp-for="Nom" class="control-label"></label>
                                 <input asp-for="Nom" class="form-control" />

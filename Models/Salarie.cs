@@ -1,4 +1,7 @@
-﻿namespace AlimBio.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AlimBio.Models
 {
     public class Salarie
     {
@@ -13,6 +16,7 @@
         public string? CodePostal { get; set; }
         public string? Ville { get; set; }
         public string? Pays { get; set; }
+        public byte[]? Image { get; set; }
 
         public int? ServiceId { get; set; }
         public Service? Service { get; set; }
@@ -21,4 +25,5 @@
         public int? SiteId { get; set; }
         public Site? Site { get; set; }
     }
+ 
 }

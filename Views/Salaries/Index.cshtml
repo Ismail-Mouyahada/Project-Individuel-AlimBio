@@ -33,7 +33,7 @@
             </form>
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="btn btn-green" asp-action="Create"> <i class="bi bi-plus"> + nouveau salarié </i></a>
+                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus"> + nouveau salarié </i></a>
             }
 
             <div class="section-title" data-aos="fade-up">
@@ -61,13 +61,16 @@
                                         <a class="btn btn-green" asp-controller="Salaries" asp-action="details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
                                         <a href="tel:@Html.DisplayFor(modelItem => item.Mobile)" class="btn btn-green"><i class="bi bi-phone"></i></a>
                                         <a href="mailto:@Html.DisplayFor(modelItem => item.Email)" class="btn btn-green"><i class="bi bi-chat"></i></a>
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
+                                            <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                                        }
                                     </div>
-                                    @if (SignInManager.IsSignedIn(User))
-                                    {
-                                        <div class="my-3">
-                                            <a class="btn btn-orange" asp-controller="Salaries" asp-action="edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
-                                            <a class="btn btn-red" asp-controller="Salaries" asp-action="delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
-                                        </div>
+                                     
+
+                                     
+                                </div>
                                     }
 
 
