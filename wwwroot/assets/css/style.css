@@ -2240,3 +2240,7 @@ section {
     color: white !important;
     background-color: #00D25F  !important;
 }
+
+img.profile-image.border-cirlce.m-2.p-2 {
+    border-radius: 50%;
+}

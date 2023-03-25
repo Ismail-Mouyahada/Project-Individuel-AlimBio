@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AlimBio.Controllers.WEB
 {
     public class SalariesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SalariesController(ApplicationDbContext context)
+
+        public SalariesController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Salaries
@@ -69,21 +73,38 @@ namespace AlimBio.Controllers.WEB
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile file)
+        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
-                if (file != null && file.Length > 0)
+                if (Image != null && Image.Length > 0)
                 {
-                    byte[] imageData = null;
+                    // Create a unique filename for the image
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
 
-                    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                    // Get the path to the wwwroot folder
+                    var wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                    // Combine the wwwroot path with the unique filename to get the full path to save the image
+                    var imagePath = Path.Combine(wwwRootPath, "images", uniqueFileName);
+
+                    // Create the images directory if it does not exist
+                    var imagesDirectory = Path.Combine(wwwRootPath, "images");
+                    if (!Directory.Exists(imagesDirectory))
                     {
-                        imageData = binaryReader.ReadBytes((int)file.Length);
+                        Directory.CreateDirectory(imagesDirectory);
                     }
 
-                    salarie.Image = imageData;
+                    // Save the image to the file system
+                    using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        Image.CopyTo(fileStream);
+                    }
+
+                    // Save the path to the image in the database
+                    salarie.Image = $"/images/{uniqueFileName}";
                 }
+
 
                 _context.Add(salarie);
                 await _context.SaveChangesAsync();

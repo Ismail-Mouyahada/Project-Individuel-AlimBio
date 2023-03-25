@@ -16,11 +16,11 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Entreprise</h2>
+                <h2>Salarié</h2>
                 <ol>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Entreprises/details</a></li>
-                    <li>Details d'entreprise </li>
+                    <li><a href="#">Nouveau</a></li>
+                    <li><a href="#">Salarié</a></li>
+ 
                 </ol>
             </div>
 
@@ -32,14 +32,16 @@
             <div class="row gy-4">
                 <div class="col-lg-6">
                     <div class="portfolio-info">
-                        <h3>Creation - Salariés </h3>
+                        <h3 class="text-center text-muted "> Ajouter un Salarié </h3>
 
 
                         <form asp-action="Create" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                             <div class="form-group">
-                                <label for="image">Image de profil:</label>
-                                <input type="file" class="form-control-file" id="image" name="Image">
+                                <label asp-for="Image" class="control-label"></label>
+                                <input asp-for="Image" type="file" class="form-control" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Nom" class="control-label"></label>

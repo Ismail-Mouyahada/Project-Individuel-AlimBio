@@ -16,7 +16,7 @@ namespace AlimBio.Models
         public string? CodePostal { get; set; }
         public string? Ville { get; set; }
         public string? Pays { get; set; }
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
 
         public int? ServiceId { get; set; }
         public Service? Service { get; set; }
