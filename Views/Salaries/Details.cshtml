@@ -25,10 +25,11 @@
         <div class="container" data-aos="fade-up">
             <div class="row gy-4">
                 <div class="col-lg-6">
-                    <div class="portfolio-info d-fex flex-column justify-content-center">
-                        <img class=" profile-image border-cirlce m-2 p-2" src="@Html.DisplayFor(model => model.Image)"/>
+                    <div class="portfolio-info d-flex flex-column justify-content-center">
+                        
                         <h3 class="text-center text-muted">Information - Salarié (@Html.DisplayFor(model => model.Nom) @Html.DisplayFor(model => model.Prenom)) </h3>
                         <ul>
+                            <li class="profile-container"><img class=" profile-image border-cirlce m-2 p-2" src="@Html.DisplayFor(model => model.Image)" /></li>
                             <li><strong>Nom</strong>:  @Html.DisplayFor(model => model.Nom)</li>
                             <li><strong>Prénom</strong>:  @Html.DisplayFor(model => model.Prenom)</li>
                             <li><strong>Fonction</strong>:  @Html.DisplayFor(model => model.Poste)</li>

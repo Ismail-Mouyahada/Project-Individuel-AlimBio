@@ -154,20 +154,19 @@ h6 {
   position: relative;
 }
 
-.navbar a,
-.navbar a:focus {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0 10px 30px;
-  font-family: "Comfortaa", Comfortaa;
-  font-size: 13px;
-  font-weight: 600;
-  color: #111;
-  white-space: nowrap;
-  text-transform: uppercase;
-  transition: 0.3s;
-}
+    .navbar a,
+    .navbar a:focus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /*    padding: 10px 0 10px !important;*/
+        font-family: Comfortaa;
+        font-size: 14px !important;
+        font-weight: 600;
+        color: #8b9ebb !important;
+        white-space: nowrap;
+        transition: 0.3s;
+    }
 
 .navbar a i,
 .navbar a:focus i {
@@ -2243,4 +2242,10 @@ section {
 
 img.profile-image {
     border-radius: 50%;
+ 
+}
+
+li.profile-container {
+    display: flex;
+    justify-content: center;
 }
