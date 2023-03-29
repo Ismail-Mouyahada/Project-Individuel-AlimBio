@@ -2241,6 +2241,6 @@ section {
     background-color: #00D25F  !important;
 }
 
-img.profile-image.border-cirlce.m-2.p-2 {
+img.profile-image {
     border-radius: 50%;
 }
