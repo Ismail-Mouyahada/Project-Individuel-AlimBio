@@ -56,6 +56,8 @@
                                 </div>
                                 <div class="member-info">
                                     <h4>@Html.DisplayFor(modelItem => item.Nom) @Html.DisplayFor(modelItem => item.Prenom)</h4>
+                                    <p>@Html.DisplayFor(modelItem => item.Poste) </p>
+
                                     <span class="my-3">@Html.DisplayFor(modelItem => item.Service.NomService)</span>
                                     <div>
                                         <a class="btn btn-green" asp-controller="Salaries" asp-action="details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
@@ -63,8 +65,8 @@
                                         <a href="mailto:@Html.DisplayFor(modelItem => item.Email)" class="btn btn-green"><i class="bi bi-chat"></i></a>
                                         @if (SignInManager.IsSignedIn(User))
                                         {
-                                            <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
-                                            <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                                            <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="bi bi-pen text-white"></span></a>
+                                            <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="bi bi-trash text-white"></span></a>
                                         }
                                     </div>
                                 </div>

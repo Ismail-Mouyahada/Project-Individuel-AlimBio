@@ -154,19 +154,19 @@ h6 {
   position: relative;
 }
 
-    .navbar a,
-    .navbar a:focus {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        /*    padding: 10px 0 10px !important;*/
-        font-family: Comfortaa;
-        font-size: 14px !important;
-        font-weight: 600;
-        color: #8b9ebb !important;
-        white-space: nowrap;
-        transition: 0.3s;
-    }
+.navbar a,
+.navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*    padding: 10px 0 10px !important;*/
+    font-family: Comfortaa;
+    font-size: 14px !important;
+    font-weight: 600;
+    color: #8b9ebb !important;
+    white-space: nowrap;
+    transition: 0.3s;
+}
 
 .navbar a i,
 .navbar a:focus i {
@@ -2248,4 +2248,27 @@ img.profile-image {
 li.profile-container {
     display: flex;
     justify-content: center;
+}
+
+header li {
+    padding: 0 1pc !important;
+}
+
+.view-service {
+    position: absolute;
+    top: 1em;
+    height: 36px;
+    right: 3em;
+    border-radius: 50%;
+    background: #878c99 !important;
+    text-align: center;
+}
+
+img.profile-image {
+    border-radius: 1px;
+    height: 17em;
+    width: 14em;
+    position: absolute;
+    left: 26em;
+    box-shadow: #dbdbec 0 0 9px 2px;
 }

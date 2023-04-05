@@ -43,11 +43,10 @@
                             </div>
                             <h4><a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.NomService)</a></h4>
                             <p class="text-black m-2 py-2 text-center">@Html.DisplayFor(modelItem => item.Description)</p>
-                            <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" class="btn btn-green "><i class="text-white fas fa-eye"></i></a>
-                            
+   
  
                                 <div class="my-2">
-                                <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
+                                <a class="btn btn-green view-service " asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
 
                                 @if (SignInManager.IsSignedIn(User))
                                 {

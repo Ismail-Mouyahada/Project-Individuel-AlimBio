@@ -34,6 +34,8 @@
                         <h3>Creation - Service </h3>
                         <form asp-action="Create">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <input type="submit" id="AutocompletDetails" value="auto-completer" class="btn btn-green my-2" />
                             <div class="form-group">
                                 <label asp-for="Siret" class="control-label"></label>
                                 <input asp-for="Siret" class="form-control" />
@@ -51,7 +53,17 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="TypeSite" class="control-label"></label>
-                                <input asp-for="TypeSite" class="form-control" />
+      
+                                <select asp-for="TypeSite" class="form-control">
+                                    <option>Selectionner le type de site</option> 
+                                    <option value="Site de production">Site de production</option>
+                                    <option value="Site de stockage">Site de stockage</option>
+                                    <option value="Site de fabrication">Site de fabrication</option>
+                                    <option value="Site d'usine">Site d'usine</option>
+                                 
+                                    <option value="Siege">Siege</option> 
+                                 
+                                </select>
                                 <span asp-validation-for="TypeSite" class="text-danger"></span>
                             </div>
                             <div class="form-group">

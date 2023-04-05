@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace AlimBio.Models
+﻿namespace AlimBio.Models
 {
     public class Salarie
     {
@@ -25,5 +22,5 @@ namespace AlimBio.Models
         public int? SiteId { get; set; }
         public Site? Site { get; set; }
     }
- 
+
 }
