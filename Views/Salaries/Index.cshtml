@@ -13,7 +13,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Employées</h2>
-                
+
                 <ol>
                     <li><a href="index.html">Employées</a></li>
                     <li>listes des employées</li>
@@ -23,17 +23,17 @@
     </section><!-- End Breadcrumbs -->
     <!-- ======= Our Team Section ======= -->
     <section id="team" class="team section-bg">
-        
+
         <div class="container">
-            <form method="get" action="@Url.Action("Index")" class="form-inline my-2 my-lg-0">
+            <form method="get" action='@Url.Action("Index")' class="form-inline my-2 my-lg-0">
                 <input class="form-control bx-border-none mr-sm-2" type="search" name="searchString" placeholder="Chercher un employé par nom , prénom, métier, email..." aria-label="Search">
                 <button class="btn btn-green my-2 my-2" type="submit"><i class="bi bi-search"> </i> Chercher</button>
-                <a class="btn btn-orange" asp-action="Index"> <i class="bi bi-erease"> Effacer le filtre </i></a>
-                
+                <a class="btn btn-orange" asp-action="Index"> <i class="bi bi-wipe"></i> Effacer le filtre  </a>
+
             </form>
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus"> + nouveau salarié </i></a>
+                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus">  </i> nouveau salarié </a>
             }
 
             <div class="section-title" data-aos="fade-up">
@@ -62,7 +62,8 @@
                                     <div>
                                         <a class="btn btn-green" asp-controller="Salaries" asp-action="details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
                                         <a href="tel:@Html.DisplayFor(modelItem => item.Mobile)" class="btn btn-green"><i class="bi bi-phone"></i></a>
-                                        <a href="mailto:@Html.DisplayFor(modelItem => item.Email)" class="btn btn-green"><i class="bi bi-chat"></i></a>
+                                        <a href="mailto:@Html.DisplayFor(modelItem => item.Email)?subject=Demande de prise de contact&body=Bonjour @Html.DisplayFor(modelItem => item.Prenom),   Je voulez savoir si vous pouvez me contacté le plus tôt possible,  bien cordialement. " class="btn btn-green"><i class="fa fa-envelope"></i></a>
+                                         <a asp-controller="Messages" asp-action="Create" class="btn btn-green"><i class="bi bi-chat"></i></a>
                                         @if (SignInManager.IsSignedIn(User))
                                         {
                                             <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="bi bi-pen text-white"></span></a>
@@ -70,11 +71,11 @@
                                         }
                                     </div>
                                 </div>
-                                    
+
                             </div>
                         </a>
                     </div>
-                     
+
                 }
             </div>
         </div>

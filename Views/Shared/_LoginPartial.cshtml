@@ -1,25 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
- 
+
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Bonjour @User.Identity?.Name </a>
+        <a class="nav-link btn btn-green text-white p-2" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-cog "></i> </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl='@Url.Action("Index", "Home", new { area = "" })'>
-                <button type="submit" class="nav-link btn btn-red text-white">Déconnextion </button>
+            <button type="submit" class="nav-link btn btn-red text-white p-2"><i class="fa fa-sign-out-alt"></i> Déconnexion</button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="btn btn-green mx-3 p-3" asp-area="Identity" asp-page="/Account/Register"><i class="fa fa-user"></i></a>
+            <a class="btn btn-green   p-3" asp-area="Identity" asp-page="/Account/Register"><i class="fa fa-user"></i></a>
         </li>
         <li class="nav-item">
-            <a class="btn btn-green mx-3 p-3" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-key"></i></a>
+            <a class="btn btn-green  p-3" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-key"></i></a>
         </li>
     }
- 

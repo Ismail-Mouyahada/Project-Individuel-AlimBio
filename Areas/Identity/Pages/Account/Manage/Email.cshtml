@@ -1,0 +1,44 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Manage Email";
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="email-form" method="post">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            @if (Model.IsEmailConfirmed)
+            {
+                <div class="form-floating mb-3 input-group">
+                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
+                        <div class="input-group-append">
+                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                        </div>
+                    <label class="form-label">Adresse E-mail</label>
+                </div>
+            }
+            else
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="veuillez saisir votre adresse e-mail." disabled />
+                    <label  class="form-label"> Mail de vérification</label>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Envoyez le mail de vérification</button>
+                </div>
+            }
+            <div class="form-floating mb-3">
+                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Votre nouvelle adresse E-mail." />
+                <label class="form-label">Nouvelle Adresse E-mail</label>
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Changer mon adresse e-mail</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

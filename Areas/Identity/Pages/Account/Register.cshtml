@@ -1,9 +1,13 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
 }
-
+ @if (SignInManager.IsSignedIn(User))
+ {
 <main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -33,16 +37,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="exemple@alimobio.fr" />
-                <label asp-for="Input.Email">Email</label>
+                <label asp-for="Input.Email">Adresse E-mail</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Mot de passe" />
-                <label asp-for="Input.Password">Password</label>
+                <label asp-for="Input.Password">Mot de passe</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirmationde mot de passe" />
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirmation de mot de passe" />
                 <label asp-for="Input.ConfirmPassword">Confirmer le mot de passe</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
@@ -59,4 +63,49 @@
 
     </section>
  
-                                </main>
+   </main>
+
+                }else{
+
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Inscription</h2>
+
+                    <ol>
+                        <li><a href="index.html">Protail</a></li>
+                        <li>Inscription</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <!-- ======= Our Team Section ======= -->
+        <section id="team" class="team section-bg">
+
+            <section id="portfolio-details" class="portfolio-details">
+                <div class="container" data-aos="fade-up">
+                    <div class="row gy-4 d-flex justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="portfolio-info">
+                               <div  class="bg-light-danger text-danger">
+                                   <p>Désolé, vous devriez vous identifier en tant que administateur pour pouvoir ajouter un nouveau utilisateur.</p>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @section Scripts {
+                <partial name="_ValidationScriptsPartial" />
+            }
+            </section><!-- End   Details Section -->
+
+        </section>
+
+    </main>
+
+
+
+                }

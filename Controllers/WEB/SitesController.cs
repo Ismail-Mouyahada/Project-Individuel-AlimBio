@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -47,6 +48,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Sites/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise");
@@ -57,6 +59,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Sites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Siret,NomSite,Description,TypeSite,Statut,NombreEmployees,Capital,Adresse,Langitude,Largitude,Effectif,DateCreation,Tel,Email,SiteWeb,EntrepriseId,VilleId")] Site site)
@@ -73,6 +76,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Sites/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Sites == null)
@@ -93,6 +97,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Sites/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Siret,NomSite,Description,TypeSite,Statut,NombreEmployees,Capital,Adresse,Langitude,Largitude,Effectif,DateCreation,Tel,Email,SiteWeb,EntrepriseId,VilleId")] Site site)
@@ -127,6 +132,7 @@ namespace AlimBio.Controllers.WEB
             return View(site);
         }
 
+        [Authorize]
         // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -148,6 +154,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // POST: Sites/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

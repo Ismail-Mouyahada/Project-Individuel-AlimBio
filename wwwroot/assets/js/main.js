@@ -126,7 +126,7 @@
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 5000,
+      delay: 1000,
       disableOnInteraction: false
     },
     pagination: {
@@ -158,11 +158,11 @@
    */
   window.addEventListener('load', () => {
     AOS.init({
-      duration: 1000,
+      duration: 500,
       easing: 'ease-in-out',
       once: true,
       mirror: false
     })
   });
-
+    $('.icp-auto').iconpicker();
 })()

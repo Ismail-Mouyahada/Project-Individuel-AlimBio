@@ -16,8 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           rel="stylesheet" />
-    <!-- Vendor CSS Files -->
 
+ 
 
     <link href="~/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="~/assets/vendor/aos/aos.css" rel="stylesheet" asp-append-version="true">
@@ -39,11 +39,11 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="#"><span>Alimo</span>Bio</a></h1>
+            <h1 class="logo me-auto"><a href="/"><span>Alimo</span>Bio</a></h1>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a asp-controller="Salaries" asp-action="Index" class="active">Accueil</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" class="active">Accueil</a></li>
 
 
                     <li><a asp-area="" asp-controller="Salaries" asp-action="Index">Equipe</a></li>
@@ -140,6 +140,10 @@
     <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://itsjavi.com/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"> </script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <!-- Vendor CSS Files -->
     <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

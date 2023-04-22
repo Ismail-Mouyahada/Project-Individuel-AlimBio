@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -20,6 +21,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Messages
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Messages.Include(m => m.Salarie);
@@ -27,6 +29,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Messages/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Messages == null)
@@ -70,6 +73,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Messages/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Messages == null)
@@ -89,6 +93,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Messages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Sujet,Details,SalarieId")] Message message)
@@ -123,6 +128,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Messages/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Messages == null)
@@ -141,7 +147,9 @@ namespace AlimBio.Controllers.WEB
             return View(message);
         }
 
+
         // POST: Messages/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
