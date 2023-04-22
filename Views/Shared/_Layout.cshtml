@@ -17,7 +17,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           rel="stylesheet" />
 
- 
+
 
     <link href="~/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="~/assets/vendor/aos/aos.css" rel="stylesheet" asp-append-version="true">
@@ -53,11 +53,11 @@
                     <li><a asp-area="" asp-controller="Entreprises" asp-action="Index">Entreprises</a></li>
                     <li><a asp-area="" asp-controller="Messages" asp-action="Create">Contact</a></li>
                     <partial name="_LoginPartial" />
-     
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
- 
+
 
         </div>
     </header><!-- End Header -->
@@ -107,11 +107,9 @@
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Rejoindre notre Newsletter</h4>
-                        <p>restez au courant de toute nouveauté</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="S'inscrire'">
-                        </form>
+                        <h4>Nous sommes à l'écoute</h4>
+                        <p>Pour toute autre demande vous pouvez nous contacter via la formulaire</p>
+                         <a asp-controller="Messages" asp-action="Create" class="btn btn-primary">Prendre contact</a>
                     </div>
 
                 </div>
@@ -126,7 +124,7 @@
                 </div>
 
             </div>
-            
+
         </div>
     </footer><!-- End Footer -->
 

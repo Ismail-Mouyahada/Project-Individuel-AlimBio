@@ -39,7 +39,7 @@
                             <div class="col-lg-4 info">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Géolocalisation:</h4>
-                                <p> @Html.DisplayFor(model => model.Adresse)<br> @Html.DisplayFor(model => model.Ville.NomVille),  @Html.DisplayFor(model => model.Ville.CodePostal)</p>
+                                <p> @Html.DisplayFor(model => model.Adresse)<br> @Html.DisplayFor(model => model.Ville.NomVille), @Html.DisplayFor(model => model.Ville.CodePostal)</p>
                             </div>
 
                             <div class="col-lg-4 info mt-4 mt-lg-0">
@@ -53,18 +53,23 @@
                                 <h4>Appel:</h4>
                                 <p> @Html.DisplayFor(model => model.Siret) <br> @Html.DisplayFor(model => model.Siret)</p>
                             </div>
-                     
+
+
+                        </div>
+
                     </div>
 
                 </div>
+            </div>
+            <div>
 
+                <div>
+                    <a class="btn btn-orange" asp-action="Edit" asp-route-id="@Model?.Id"><i class="ti ti-pen"></i></a> |
+                    <a class="btn btn-orange" asp-action="Index">Précédent</a>
+                </div>
             </div>
         </div>
 
-        <div>
-            <a class="btn btn-orange" asp-action="Edit" asp-route-id="@Model?.Id"><i class="ti ti-pen"></i></a> |
-            <a class="btn btn-orange" asp-action="Index">Précédent</a>
-        </div>
     </section><!-- End Contact Section -->
 
 </main><!-- End #main -->

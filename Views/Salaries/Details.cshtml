@@ -15,7 +15,7 @@
                 <ol>
                     <li><a href="#">Détails</a></li>
                     <li><a href="#">Salarié</a></li>
-             
+
                 </ol>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="row gy-4">
                 <div class="col-lg-6">
                     <div class="portfolio-info d-flex flex-column justify-content-center">
-                        
+
                         <h3 class="text-center text-muted">Information - Salarié (@Html.DisplayFor(model => model.Nom) @Html.DisplayFor(model => model.Prenom)) </h3>
                         <ul>
                             <li class="profile-container"><img class=" profile-image border-cirlce m-2 p-2" src="@Html.DisplayFor(model => model.Image)" /></li>
@@ -40,8 +40,8 @@
                             <li><strong>Code Postal</strong>:  @Html.DisplayFor(model => model.CodePostal)</li>
                             <li><strong>Ville</strong>:  @Html.DisplayFor(model => model.Ville)</li>
                             <li><strong>Pays</strong>:  @Html.DisplayFor(model => model.Pays)</li>
-                             
-                             
+
+
                         </ul>
                         <ul>
                             <li>
@@ -52,7 +52,7 @@
                                     <a class="btn btn-orange" asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-pen text-white"></i></a>
                                     <a class="btn btn-red" asp-action="delete" asp-route-id="@Model?.Id"><i class="fas fa-trash text-white"></i></a>
                                 }
- 
+
                             </li>
 
                         </ul>
@@ -67,7 +67,7 @@
                             <li><strong>Nom de Site</strong>: @Html.DisplayFor(model => model.Site.NomSite) || <strong>SIREN</strong>: @Html.DisplayFor(model => model.Site.Siret)</li>
                             <b>Description</b>:
                             <p class="card  p-3">  @Html.DisplayFor(model => model.Site.Description)</p>
-                            <p class="card py-2 m-y2">  @Html.DisplayFor(model => model.Site.Description)</p>
+                            <p class="card p-3">  @Html.DisplayFor(model => model.Site.Description)</p>
                             <li><strong>Capital</strong>:  @Html.DisplayFor(model => model.Site.Capital) €</li>
                             <li><strong>Effectif</strong>:  @Html.DisplayFor(model => model.Site.Effectif) employée</li>
                             <li><strong>Adresse E-mail</strong>:  @Html.DisplayFor(model => model.Site.Email)</li>
@@ -81,8 +81,8 @@
                           </ul>
                         <h3>Information - Service </h3>
                           <ul>
-                             
-                             
+
+
                                 <li><strong>Nom de service</strong>:  @Html.DisplayFor(model => model.Service.NomService)</li>
                                 <strong>Description</strong>:
                                 <p> @Html.DisplayFor(model => model.Service.Description)</p>

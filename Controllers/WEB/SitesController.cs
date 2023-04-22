@@ -159,9 +159,9 @@ namespace AlimBio.Controllers.WEB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Sites == null)
+            if (_context.Sites == null )
             {
-                return Problem("Entity set 'ApplicationDbContext.Sites'  is null.");
+                return RedirectToAction(nameof(Index));
             }
             var site = await _context.Sites.FindAsync(id);
             if (site != null)

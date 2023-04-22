@@ -9,14 +9,25 @@
     }
 }
 
- 
-<div class="m-5 pt-5">
-    <h1>Gerer votre compte </h1>
+ <main id="main">
 
-    <h2>Modifier les paramètres de votre compte</h2>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-start align-items-center">
+                <i class="fa fa-cog fa-2x text-white pr-1"></i> <h2>  Gestion de compte</h2>
+
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+<div class="m-5 ">
+
     <hr />
     <div class="container-fluid">
-        <div class="row"> 
+        <div class="row">
         <div class="col-md-3">
             <partial name="_ManageNav" />
         </div>
@@ -26,7 +37,7 @@
         </div>
     </div>
 </div>
-
+</main>
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }

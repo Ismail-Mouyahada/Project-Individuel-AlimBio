@@ -4,12 +4,20 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs bg-danger rounded-0">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <h6 class="text-white">Confirmation de suppression</h6>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Entreprise</h4>
-    <hr />
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+<h5 class="p-2 text-muted m-2">Êtes-vous sûre de bien vouloir supprimé cet enregistrement ?</h5>
+<div class="card p-2">
+<div class=" col-md-6 m-2 card-body shadow py-4">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Siren)
@@ -144,10 +152,12 @@
             @Html.DisplayFor(model => model.ImmatriculationTva)
         </dd>
     </dl>
-    
+</div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Supprimer" class="btn btn-red" />
+        <a class="btn btn-green my-1" asp-action="Index"><i class="fa fa-arrow-left"></i></a>
     </form>
 </div>
+</main><!-- End #main -->
+

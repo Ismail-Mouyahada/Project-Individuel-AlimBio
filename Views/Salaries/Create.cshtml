@@ -20,7 +20,7 @@
                 <ol>
                     <li><a href="#">Nouveau</a></li>
                     <li><a href="#">Salarié</a></li>
- 
+
                 </ol>
             </div>
 
@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label asp-for="Image" class="control-label"></label>
-                                <input asp-for="Image" type="file" class="form-control" />
+                                <input asp-for="Image" type="file" class="form-control" re/>
                                 <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -121,7 +121,7 @@
     </section><!-- End   Details Section -->
 
 </main><!-- End #main -->
- 
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

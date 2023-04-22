@@ -9,7 +9,6 @@ using AlimBio.Data;
 using AlimBio.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -26,19 +25,18 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Salaries
-       
 
 
-        public async Task<IActionResult> Index(string searchString)
+
+        public async Task<IActionResult> Index(string? searchString)
         {
 
 
-            var salaries = from s in _context.Salaries
-                select s;
+            var salaries = from s in _context.Salaries select s;
             if (!string.IsNullOrEmpty(searchString))
             {
                 salaries = salaries.Where(s => s.Nom.Contains(searchString)
-                                               || s.Prenom.Contains(searchString) || s.Email.Contains(searchString)  || s.Poste.Contains(searchString));
+                                               || s.Prenom.Contains(searchString) || s.Email.Contains(searchString) || s.Poste.Contains(searchString));
             }
             return View(await salaries.ToListAsync());
         }
@@ -79,10 +77,13 @@ namespace AlimBio.Controllers.WEB
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile Image)
+        public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile? Image)
         {
+
+
             if (ModelState.IsValid)
             {
+
                 if (Image != null && Image.Length > 0)
                 {
                     // Create a unique filename for the image
@@ -109,6 +110,10 @@ namespace AlimBio.Controllers.WEB
 
                     // Save the path to the image in the database
                     salarie.Image = $"/images/{uniqueFileName}";
+                }
+                else
+                {
+                    salarie.Image = "/images/unconnu.jpeg";
                 }
 
 
@@ -150,7 +155,7 @@ namespace AlimBio.Controllers.WEB
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile Image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile? Image)
         {
             if (id != salarie.Id)
             {
@@ -187,34 +192,38 @@ namespace AlimBio.Controllers.WEB
 
                         // Save the path to the image in the database
                         salarie.Image = $"/images/{uniqueFileName}";
-                    }
-                    if (Image != null && Image.Length > 0)
+                    } else
                     {
-                        // Create a unique filename for the image
-                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
-
-                        // Get the path to the wwwroot folder
-                        var wwwRootPath = _webHostEnvironment.WebRootPath;
-
-                        // Combine the wwwroot path with the unique filename to get the full path to save the image
-                        var imagePath = Path.Combine(wwwRootPath, "images", uniqueFileName);
-
-                        // Create the images directory if it does not exist
-                        var imagesDirectory = Path.Combine(wwwRootPath, "images");
-                        if (!Directory.Exists(imagesDirectory))
-                        {
-                            Directory.CreateDirectory(imagesDirectory);
-                        }
-
-                        // Save the image to the file system
-                        using (var fileStream = new FileStream(imagePath, FileMode.Create))
-                        {
-                            Image.CopyTo(fileStream);
-                        }
-
-                        // Save the path to the image in the database
-                        salarie.Image = $"/images/{uniqueFileName}";
+                        salarie.Image = "/images/unconnu.jpeg";
                     }
+
+                    // if (Image != null && Image.Length > 0)
+                    // {
+                    //     // Create a unique filename for the image
+                    //     var uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+
+                    //     // Get the path to the wwwroot folder
+                    //     var wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                    //     // Combine the wwwroot path with the unique filename to get the full path to save the image
+                    //     var imagePath = Path.Combine(wwwRootPath, "images", uniqueFileName);
+
+                    //     // Create the images directory if it does not exist
+                    //     var imagesDirectory = Path.Combine(wwwRootPath, "images");
+                    //     if (!Directory.Exists(imagesDirectory))
+                    //     {
+                    //         Directory.CreateDirectory(imagesDirectory);
+                    //     }
+
+                    //     // Save the image to the file system
+                    //     using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                    //     {
+                    //         Image.CopyTo(fileStream);
+                    //     }
+
+                    //     // Save the path to the image in the database
+                    //     salarie.Image = $"/images/{uniqueFileName}";
+                    // }
                     _context.Update(salarie);
                     await _context.SaveChangesAsync();
                 }
@@ -274,14 +283,14 @@ namespace AlimBio.Controllers.WEB
             {
                 _context.Salaries.Remove(salarie);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SalarieExists(int id)
         {
-          return (_context.Salaries?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Salaries?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

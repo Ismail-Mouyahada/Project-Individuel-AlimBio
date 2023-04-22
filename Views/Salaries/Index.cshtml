@@ -58,7 +58,7 @@
                                     <h4>@Html.DisplayFor(modelItem => item.Nom) @Html.DisplayFor(modelItem => item.Prenom)</h4>
                                     <p>@Html.DisplayFor(modelItem => item.Poste) </p>
 
-                                    <span class="my-3">@Html.DisplayFor(modelItem => item.Service.NomService)</span>
+                                    <span class="my-3">@Html.DisplayFor(modelItem => item.Service.NomService  )</span>
                                     <div>
                                         <a class="btn btn-green" asp-controller="Salaries" asp-action="details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
                                         <a href="tel:@Html.DisplayFor(modelItem => item.Mobile)" class="btn btn-green"><i class="bi bi-phone"></i></a>

@@ -6,49 +6,66 @@
 @{
     ViewData["Title"] = "Index";
 }
+<main id="main">
 
-<h1>Index</h1>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Sujet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Details)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salarie)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Message</h2>
+                <ol>
+                    <li><a href="#">Liste des messages</a></li>
+                    <li><a href="#">Contact</a> </li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+<div class="panel-body">
+ <ul class="list-group">
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sujet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salarie.Id)
-            </td>
-            <td>
-                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
 
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
-                        <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
-                    }
-            </td>
-        </tr>
+
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+
+                                    <div class="mic-info">
+                                        Pour: <a href="#"> @Html.DisplayFor(modelItem => item.Salarie.Nom)  @Html.DisplayFor(modelItem => item.Salarie.Prenom)</a>
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+                                    @Html.DisplayFor(modelItem => item.Details)
+                                </div>
+                                <div class="action">
+                                    <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
+
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
+                                        <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+
+
+
 }
-    </tbody>
-</table>
+
+
+         </ul>
+
+ </div>
+
+</main><!-- End #main -->
+

@@ -22,14 +22,26 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
+
+     <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Liste des services</h2>
+                <p>Retouvez ici la liste des services de l'entreprise.</p>
+            </div>
+
+        </div>
+    </section><!-- End Features Section -->
     <!-- ======= Services Section ======= -->
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus"> + Nouvelle Service </i></a>
+                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus"> </i>  Nouvelle Service  </a>
             }
-   
+
             <div class="row">
 
                 @foreach (var item in Model)
@@ -38,13 +50,13 @@
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch my-3" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box   text-white">
                             <div class="icon" style="border-radius: 50%;color: white!important; background-color: @Html.DisplayFor(modelItem => item.Couleur)">
-                               
+
                                 <i class=" fa fa-@Html.DisplayFor(modelItem => item.Icon)"></i>
                             </div>
                             <h4><a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.NomService)</a></h4>
                             <p class="text-black m-2 py-2 text-center">@Html.DisplayFor(modelItem => item.Description)</p>
-   
- 
+
+
                                 <div class="my-2">
                                 <a class="btn btn-green view-service " asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
 
@@ -54,7 +66,7 @@
                                     <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
                                 }
                                 </div>
- 
+
                         </div>
                     </div>
                 }
@@ -63,27 +75,8 @@
 
         </div>
     </section><!-- End Services Section -->
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-        <div class="container" data-aos="fade-up">
 
-            <div class="section-title">
-                <h2>Features</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <div class="icon-box">
-                        <i class="ri-store-line" style="color: #ffbb2c;"></i>
-                        <h3><a href="">Lorem Ipsum</a></h3>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End Features Section -->
 
 </main><!-- End #main -->
- 
+
 

@@ -51,7 +51,7 @@ namespace AlimBio.Controllers.WEB
         // GET: Messages/Create
         public IActionResult Create()
         {
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Email", "Nom");
+            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Email");
             return View();
         }
 
@@ -163,14 +163,14 @@ namespace AlimBio.Controllers.WEB
             {
                 _context.Messages.Remove(message);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MessageExists(int id)
         {
-          return (_context.Messages?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Messages?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
