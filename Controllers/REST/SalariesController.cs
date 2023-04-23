@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.REST
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class SalariesController : ControllerBase
@@ -22,24 +24,26 @@ namespace AlimBio.Controllers.REST
         }
 
         // GET: api/Salaries
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Salarie>>> GetSalaries()
         {
-          if (_context.Salaries == null)
-          {
-              return NotFound();
-          }
+            if (_context.Salaries == null)
+            {
+                return NotFound();
+            }
             return await _context.Salaries.ToListAsync();
         }
 
         // GET: api/Salaries/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Salarie>> GetSalarie(int id)
         {
-          if (_context.Salaries == null)
-          {
-              return NotFound();
-          }
+            if (_context.Salaries == null)
+            {
+                return NotFound();
+            }
             var salarie = await _context.Salaries.FindAsync(id);
 
             if (salarie == null)
@@ -52,6 +56,7 @@ namespace AlimBio.Controllers.REST
 
         // PUT: api/Salaries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSalarie(int id, Salarie salarie)
         {
@@ -83,13 +88,14 @@ namespace AlimBio.Controllers.REST
 
         // POST: api/Salaries
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Salarie>> PostSalarie(Salarie salarie)
         {
-          if (_context.Salaries == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Salaries'  is null.");
-          }
+            if (_context.Salaries == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Salaries'  is null.");
+            }
             _context.Salaries.Add(salarie);
             await _context.SaveChangesAsync();
 
@@ -97,6 +103,7 @@ namespace AlimBio.Controllers.REST
         }
 
         // DELETE: api/Salaries/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSalarie(int id)
         {

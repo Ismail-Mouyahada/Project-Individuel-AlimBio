@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.REST
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class EntreprisesController : ControllerBase
@@ -49,7 +51,7 @@ namespace AlimBio.Controllers.REST
 
             return entreprise;
         }
-
+        [Authorize]
         // PUT: api/Entreprises/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -83,6 +85,7 @@ namespace AlimBio.Controllers.REST
 
         // POST: api/Entreprises
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Entreprise>> PostEntreprise(Entreprise entreprise)
         {
@@ -97,6 +100,7 @@ namespace AlimBio.Controllers.REST
         }
 
         // DELETE: api/Entreprises/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntreprise(int id)
         {

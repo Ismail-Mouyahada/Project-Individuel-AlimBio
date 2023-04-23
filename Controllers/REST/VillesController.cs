@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.REST
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class VillesController : ControllerBase
@@ -22,24 +24,26 @@ namespace AlimBio.Controllers.REST
         }
 
         // GET: api/Villes
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ville>>> GetVilles()
         {
-          if (_context.Villes == null)
-          {
-              return NotFound();
-          }
+            if (_context.Villes == null)
+            {
+                return NotFound();
+            }
             return await _context.Villes.ToListAsync();
         }
 
         // GET: api/Villes/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Ville>> GetVille(int id)
         {
-          if (_context.Villes == null)
-          {
-              return NotFound();
-          }
+            if (_context.Villes == null)
+            {
+                return NotFound();
+            }
             var ville = await _context.Villes.FindAsync(id);
 
             if (ville == null)
@@ -52,6 +56,7 @@ namespace AlimBio.Controllers.REST
 
         // PUT: api/Villes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVille(int id, Ville ville)
         {
@@ -83,13 +88,14 @@ namespace AlimBio.Controllers.REST
 
         // POST: api/Villes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Ville>> PostVille(Ville ville)
         {
-          if (_context.Villes == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Villes'  is null.");
-          }
+            if (_context.Villes == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Villes'  is null.");
+            }
             _context.Villes.Add(ville);
             await _context.SaveChangesAsync();
 
@@ -97,6 +103,7 @@ namespace AlimBio.Controllers.REST
         }
 
         // DELETE: api/Villes/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVille(int id)
         {

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.REST
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ServicesController : ControllerBase
@@ -22,6 +24,7 @@ namespace AlimBio.Controllers.REST
         }
 
         // GET: api/Services
+         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Service>>> GetServices()
         {
@@ -33,6 +36,7 @@ namespace AlimBio.Controllers.REST
         }
 
         // GET: api/Services/5
+         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Service>> GetService(int id)
         {
@@ -52,6 +56,7 @@ namespace AlimBio.Controllers.REST
 
         // PUT: api/Services/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+         [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutService(int id, Service service)
         {
@@ -83,6 +88,7 @@ namespace AlimBio.Controllers.REST
 
         // POST: api/Services
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Service>> PostService(Service service)
         {
@@ -97,6 +103,7 @@ namespace AlimBio.Controllers.REST
         }
 
         // DELETE: api/Services/5
+         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteService(int id)
         {
