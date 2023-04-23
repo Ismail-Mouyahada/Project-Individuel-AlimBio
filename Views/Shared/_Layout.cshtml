@@ -5,8 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>@ViewData["Title"] - AlimBio</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content='@ViewData["Description"]' name="description">
+    <meta content='@ViewData["keywords"]' name="keywords">
 
     <!-- Favicons -->
     <link href="./favicon.png" rel="icon">
@@ -87,26 +87,28 @@
                         </p>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 footer-links">
+                    <div class="col-lg-3 col-md-6 footer-links">
                         <h4>liens outiles</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Accueil</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Employees</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Politque d'utilisateur</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/">Accueil</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Services" asp-action="Index">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Salaries" asp-action="Index">Salariés</a></li>
+                            <li> <i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Politique de confidentialité</a></li>
+                            <li> <i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="CGV">CGV</a></li>
+
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Informatique</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Adminisrateur</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Services" asp-action="Index">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Services" asp-action="Index">Informatique</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Services" asp-action="Index">Adminisrateur</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <div class="col-lg-3 col-md-6 footer-newsletter">
                         <h4>Nous sommes à l'écoute</h4>
                         <p>Pour toute autre demande vous pouvez nous contacter via la formulaire</p>
                          <a asp-controller="Messages" asp-action="Create" class="btn btn-primary">Prendre contact</a>

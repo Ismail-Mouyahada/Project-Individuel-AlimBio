@@ -23,6 +23,18 @@ namespace AlimBio.Controllers
             return View();
         }
 
+
+         public IActionResult Condition()
+        {
+            return View();
+        }
+
+           public IActionResult CGV()
+        {
+            return View();
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

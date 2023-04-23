@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -159,23 +159,38 @@ namespace AlimBio.Controllers.WEB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Sites == null )
+            if (_context.Sites == null)
             {
                 return RedirectToAction(nameof(Index));
             }
+
             var site = await _context.Sites.FindAsync(id);
+
+            if (site == null)
+            {
+                return NotFound();
+            }
             if (site != null)
             {
                 _context.Sites.Remove(site);
             }
-            
+
+            if (_context.Salaries.Any(s => s.SiteId == id))
+            {
+                TempData["erreur"] = "Vous ne pouvez pas supprimer ce site, parce qu'il est associé avec des salariés.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _context.Sites.Remove(site);
             await _context.SaveChangesAsync();
+
+            TempData["reussi"] = "le site a été supprimé avec succès.";
             return RedirectToAction(nameof(Index));
         }
 
         private bool SiteExists(int id)
         {
-          return (_context.Sites?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Sites?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

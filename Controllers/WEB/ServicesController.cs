@@ -161,17 +161,28 @@ namespace AlimBio.Controllers.WEB
         {
             if (_context.Services == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Services'  is null.");
+                return RedirectToAction(nameof(Index));
             }
+
             var service = await _context.Services.FindAsync(id);
-            if (service != null)
+            if (service == null)
             {
-                _context.Services.Remove(service);
+                return NotFound();
             }
-            
+
+            if (_context.Salaries.Any(s => s.ServiceId == id))
+            {
+                TempData["erreur"] = "Vous ne pouvez pas supprimer ce service , parce que il est associer à des salarié.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _context.Services.Remove(service);
             await _context.SaveChangesAsync();
+
+            TempData["reussi"] = "Ce Service a été supprimé avec succès .";
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool ServiceExists(int id)
         {

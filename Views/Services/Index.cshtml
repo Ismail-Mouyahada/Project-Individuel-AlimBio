@@ -22,7 +22,16 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
-
+    @if (TempData["erreur"] != null)
+    {
+        <div class="alert alert-danger m-2" role="alert">
+            @TempData["erreur"]
+        </div>
+    }else if(TempData["reussi"] != null){
+        <div class="alert alert-success m-2" role="alert">
+            @TempData["reussi"]
+        </div>
+    }
      <!-- ======= Features Section ======= -->
     <section id="features" class="features">
         <div class="container" data-aos="fade-up">
