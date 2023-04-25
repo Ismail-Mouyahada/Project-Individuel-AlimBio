@@ -17,10 +17,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Salarié</h2>
+                <h2>Site</h2>
                 <ol>
                     <li><a href="#">Modifier</a></li>
-                    <li><a href="#">Salarié</a></li>
+                    <li><a href="#">Site</a></li>
                 </ol>
             </div>
 
@@ -32,7 +32,7 @@
             <div class="row gy-4">
                 <div class="col-lg-6">
                     <div class="portfolio-info">
-                        <h3>Creation - Service </h3>
+                        <h3>Creation - Site </h3>
                         <form asp-action="Edit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
@@ -116,7 +116,13 @@
                                 <select asp-for="EntrepriseId" class="form-control" asp-items="ViewBag.EntrepriseId"></select>
                                 <span asp-validation-for="EntrepriseId" class="text-danger"></span>
                             </div>
-                           
+
+                             <div class="form-group">
+                                <label asp-for="VilleId" class="control-label"></label>
+                                <select asp-for="VilleId" class="form-control" asp-items="ViewBag.VilleId"></select>
+                                <span asp-validation-for="VilleId" class="text-danger"></span>
+                            </div>
+
                             <div class="form-group">
                                 <input type="submit" value="Soumettre" class="btn btn-green my-2" />
                             </div>
@@ -133,7 +139,7 @@
     </section><!-- End   Details Section -->
 
 </main><!-- End #main -->
- 
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -22,9 +22,9 @@ namespace AlimBio.Controllers.WEB
         // GET: Villes
         public async Task<IActionResult> Index()
         {
-              return _context.Villes != null ? 
-                          View(await _context.Villes.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Villes'  is null.");
+            return _context.Villes != null ?
+                        View(await _context.Villes.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Villes'  is null.");
         }
 
         // GET: Villes/Details/5
@@ -150,14 +150,14 @@ namespace AlimBio.Controllers.WEB
             {
                 _context.Villes.Remove(ville);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VilleExists(int id)
         {
-          return (_context.Villes?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Villes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using System.Net.Mail;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -64,6 +66,7 @@ namespace AlimBio.Controllers.WEB
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(message);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

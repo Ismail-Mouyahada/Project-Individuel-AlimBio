@@ -16,10 +16,10 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Salarié</h2>
+                <h2>Site</h2>
                 <ol>
                     <li><a href="#">Nouveau</a></li>
-                    <li><a href="#">Salarié</a></li>
+                    <li><a href="#">Site</a></li>
                 </ol>
             </div>
 
@@ -53,16 +53,16 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="TypeSite" class="control-label"></label>
-      
+
                                 <select asp-for="TypeSite" class="form-control">
-                                    <option>Selectionner le type de site</option> 
+                                    <option>Selectionner le type de site</option>
                                     <option value="Site de production">Site de production</option>
                                     <option value="Site de stockage">Site de stockage</option>
                                     <option value="Site de fabrication">Site de fabrication</option>
                                     <option value="Site d'usine">Site d'usine</option>
-                                 
-                                    <option value="Siege">Siege</option> 
-                                 
+
+                                    <option value="Siege">Siege</option>
+
                                 </select>
                                 <span asp-validation-for="TypeSite" class="text-danger"></span>
                             </div>
@@ -127,8 +127,10 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="VilleId" class="control-label"></label>
-                                <select asp-for="VilleId" class="form-control" asp-items="ViewBag.EntrepriseId"></select>
+                                <select asp-for="VilleId" class="form-control" asp-items="ViewBag.VilleId"></select>
                             </div>
+
+
                             <div class="form-group">
                                 <input type="submit" value="Soumettre" class="btn btn-green my-2" />
                             </div>
@@ -145,7 +147,7 @@
     </section><!-- End   Details Section -->
 
 </main><!-- End #main -->
- 
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

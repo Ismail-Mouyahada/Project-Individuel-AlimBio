@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlimBio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230325141405_Initial-Migration")]
+    [Migration("20230425155713_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace AlimBio.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("AlimBio.Models.Entreprise", b =>
@@ -147,8 +147,8 @@ namespace AlimBio.Migrations
                     b.Property<string>("Fix")
                         .HasColumnType("longtext");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("longblob");
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Mobile")
                         .HasColumnType("longtext");
@@ -358,7 +358,9 @@ namespace AlimBio.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -416,7 +418,25 @@ namespace AlimBio.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "94",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "995f2180-ba7f-4a8f-aa86-9234e7a9437b",
+                            Email = "admin@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL1PdxE7CevjUYlS3bEVaEuMtYY5m9kGAQ5eFMRnrwsjHs1NBaAgF/wUmtvV+xmjyA==",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@example.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -433,7 +453,7 @@ namespace AlimBio.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -445,19 +465,17 @@ namespace AlimBio.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -469,7 +487,7 @@ namespace AlimBio.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("RoleId")
                         .HasColumnType("varchar(255)");
@@ -484,15 +502,13 @@ namespace AlimBio.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Value")
                         .HasColumnType("longtext");

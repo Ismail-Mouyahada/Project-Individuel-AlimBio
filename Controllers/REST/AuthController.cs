@@ -1,10 +1,13 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AlimBio.Controllers.REST
@@ -13,96 +16,73 @@ namespace AlimBio.Controllers.REST
     [ApiController]
     public class AuthController : ControllerBase
     {
-          private readonly UserManager<IdentityUser> _userManager;
-
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-
-        public AuthController(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        public AuthController(UserManager<IdentityUser> userManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _configuration = configuration;
-
+            _signInManager = signInManager;
         }
 
-         [HttpPost]
-        public IActionResult Connexion(LoginDto utilisateur)
+        [HttpPost]
+        public async Task<IActionResult> Connexion([FromBody] AuthUtilisateur utilisateur)
         {
-            if (_userManager.Users == null)
-            {
-                throw new ArgumentNullException(nameof(_userManager.Users) + "tout est vide.");
-            }
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-
-            // Check if the user Existes
-            var user = _userManager.Users.FirstOrDefault(u => u.Email == utilisateur.Email && u.PasswordHash ==  HashPassword(utilisateur.PasswordHash));
+            var user = await _userManager.FindByEmailAsync(utilisateur.Email);
             if (user == null)
             {
-                return Unauthorized(new { message = "Déoslé les identifiants invalides ou introuvable"});
+                return Unauthorized(new { message = "Désolé, les identifiants sont invalides ou l'utilisateur n'existe pas." });
             }
 
-            // Create token
-            if (utilisateur.Email == null)
+            var result = await _signInManager.CheckPasswordSignInAsync(user, utilisateur.Password, false);
+            if (!result.Succeeded)
             {
-                throw new ArgumentNullException(nameof(utilisateur.Email), "tout est vide.");
+                return Unauthorized(new { message = "Désolé, les identifiants sont invalides ou l'utilisateur n'existe pas." });
             }
+
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, utilisateur.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:APIKey"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:APIKey"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-
-            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Today.AddDays(2),
-                signingCredentials: signingCredentials
-                );
+                expires: DateTime.UtcNow.AddDays(7),
+                signingCredentials: credentials);
+
+            var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+
             return Ok(new
             {
-                Access_Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Date_Expiration = DateTime.Now.AddDays(2),
-                Nom_uilisateur = utilisateur.Email,
-
+                access_token = encodedToken,
+                token_type = "Bearer",
+                expires_in = TimeSpan.FromDays(7).TotalSeconds,
+                user_id = user.Id
             });
         }
-         public static string HashPassword(string password)
-            {
-                byte[] salt;
-                byte[] buffer2;
-                if (password == null)
-                {
-                    throw new ArgumentNullException("password");
-                }
-                using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
-                {
-                    salt = bytes.Salt;
-                    buffer2 = bytes.GetBytes(0x20);
-                }
-                byte[] dst = new byte[0x31];
-                Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
-                Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
-                return Convert.ToBase64String(dst);
-            }
-
-
-
     }
 
-
-  public class LoginDto
+    public class AuthUtilisateur
     {
+        [Required(ErrorMessage = "L'email est obligatoire.")]
+        [EmailAddress(ErrorMessage = "L'email n'est pas valide.")]
         public string Email { get; set; }
-        public string PasswordHash { get; set; }
-    }
 
+        [Required(ErrorMessage = "Le mot de passe est obligatoire.")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
 }

@@ -24,7 +24,10 @@
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
         <div class="container" data-aos="fade-up">
+
+            @if (SignInManager.IsSignedIn(User)){
             <a class="btn btn-green my-2" asp-action="Create"> + nouvelle entreprise </a>
+            }
             <div class="row gy-4">
                 @foreach( var item in Model)
                 {
@@ -44,7 +47,7 @@
                                         <a class="btn btn-orange" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pen"></span></a>
                                         <a class="btn btn-red" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
                                     }
-                                    
+
                                 </li>
                             </ul>
                         </div>
@@ -63,4 +66,3 @@
     </section><!-- End   Details Section -->
 
 </main><!-- End #main -->
- 

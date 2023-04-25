@@ -48,7 +48,7 @@
                                 <input type="submit" value="Soumettre" class="btn btn-green my-2" />
                             </div>
                         </form>
-                         
+
                         <div>
                             <a class="btn btn-green my-2" asp-action="Index"> <i class="fa fa-arrow-left"></i></a>
                         </div>
@@ -61,7 +61,32 @@
 
 </main><!-- End #main -->
 
- 
+ <script>
+
+      const cityNameInput = document.querySelector("#cityName");
+    const postalCodeInput = document.querySelector("#postalCode");
+
+    cityNameInput.addEventListener("input", function() {
+        const cityName = cityNameInput.value.trim();
+
+        if (cityName.length > 2) {
+            const url = `http://api.geonames.org/searchJSON?q=${cityName}&maxRows=10&username=@@ismailgeo`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const geonames = data.geonames;
+                    if (geonames.length > 0) {
+                        const geoname = geonames[0];
+                        postalCodeInput.value = geoname.postalcode;
+                    }
+                })
+                .catch(error => console.error(error));
+        } else {
+            postalCodeInput.value = "";
+        }
+    });
+
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

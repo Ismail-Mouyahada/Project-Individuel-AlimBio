@@ -52,7 +52,7 @@ namespace AlimBio.Controllers.WEB
         public IActionResult Create()
         {
             ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise");
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomSite");
+            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille");
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace AlimBio.Controllers.WEB
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", site.EntrepriseId);
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomSite", site.VilleId);
+            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille", site.VilleId);
             return View(site);
         }
 
@@ -90,7 +90,7 @@ namespace AlimBio.Controllers.WEB
                 return NotFound();
             }
             ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", site.EntrepriseId);
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomSite", site.VilleId);
+            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille", site.VilleId);
             return View(site);
         }
 
@@ -128,7 +128,7 @@ namespace AlimBio.Controllers.WEB
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", site.EntrepriseId);
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomSite", site.VilleId);
+            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille", site.VilleId);
             return View(site);
         }
 
