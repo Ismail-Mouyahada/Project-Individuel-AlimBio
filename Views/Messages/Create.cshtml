@@ -19,7 +19,16 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
-
+  @if (TempData["erreur"] != null)
+    {
+        <div class="alert alert-danger m-2" role="alert">
+            @TempData["erreur"]
+        </div>
+    }else if(TempData["reussi"] != null){
+        <div class="alert alert-success m-2" role="alert">
+            @TempData["reussi"]
+        </div>
+    }
     <section id="portfolio-details" class="portfolio-details">
     <div class="container" data-aos="fade-up">
             <div class="row gy-4  d-flex justify-content-center">

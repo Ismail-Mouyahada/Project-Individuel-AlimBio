@@ -71,12 +71,14 @@ namespace AlimBio.Controllers.WEB
                     Credentials = new NetworkCredential("6af039d0b778fd", "7d7de1147afa65"),
                     EnableSsl = true
                 };
-                client.Send("from@adlimobio.fr", message.Salarie.Email.ToString(), message.Sujet.ToString(), message.Details.ToString());
+                client.Send("from@adlimobio.fr", "to@example.fr", "Contact de puis le site AlimoBio", " Vous avez été contacté");
 
                 _context.Add(message);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["reussi"] = "Message envoyé avec succès .";
+                return RedirectToAction(nameof(Create));
             }
+            TempData["erreur"] = "désolé le message n'a pas pu être envoyé .";
             ViewData["SalarieId"] = new SelectList(_context.Salaries, "Email", "Nom", message.SalarieId);
             return View(message);
         }
