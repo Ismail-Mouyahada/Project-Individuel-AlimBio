@@ -4,44 +4,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Net;
-using System.Net.Mail;
+using AlimBio.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlimBio.Controllers.WEB
 {
     public class MessagesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMessageService _messageService;
 
-        public MessagesController(ApplicationDbContext context)
+        public MessagesController(IMessageService messageService)
         {
-            _context = context;
+            _messageService = messageService;
         }
 
         // GET: Messages
-        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Messages.Include(m => m.Salarie);
-            return View(await applicationDbContext.ToListAsync());
+            var messages = await _messageService.GetAllMessagesAsync();
+            return View(messages);
         }
 
         // GET: Messages/Details/5
-        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Messages == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var message = await _context.Messages
-                .Include(m => m.Salarie)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var message = await _messageService.GetMessageByIdAsync(id.Value);
+
             if (message == null)
             {
                 return NotFound();
@@ -53,61 +48,48 @@ namespace AlimBio.Controllers.WEB
         // GET: Messages/Create
         public IActionResult Create()
         {
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Id", "Email");
             return View();
         }
 
         // POST: Messages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Sujet,Details,SalarieId")] Message message)
+        public async Task<IActionResult> Create([Bind("Id,Sujet,Details")] Message message)
         {
             if (ModelState.IsValid)
             {
-                var client = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
-                {
-                    Credentials = new NetworkCredential("6af039d0b778fd", "7d7de1147afa65"),
-                    EnableSsl = true
-                };
-                client.Send("from@adlimobio.fr", "to@example.fr", "Contact de puis le site AlimoBio", " Vous avez été contacté");
-
-                _context.Add(message);
-                await _context.SaveChangesAsync();
-                TempData["reussi"] = "Message envoyé avec succès .";
-                return RedirectToAction(nameof(Create));
+                await _messageService.CreateMessageAsync(message);
+                return RedirectToAction(nameof(Index));
             }
-            TempData["erreur"] = "désolé le message n'a pas pu être envoyé .";
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Email", "Nom", message.SalarieId);
             return View(message);
         }
 
         // GET: Messages/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Messages == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var message = await _context.Messages.FindAsync(id);
+            var message = await _messageService.GetMessageByIdAsync(id.Value);
+
             if (message == null)
             {
                 return NotFound();
             }
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Email", "Nom", message.SalarieId);
+
             return View(message);
         }
 
         // POST: Messages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Sujet,Details,SalarieId")] Message message)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Sujet,Details")] Message message)
         {
             if (id != message.Id)
             {
@@ -118,12 +100,11 @@ namespace AlimBio.Controllers.WEB
             {
                 try
                 {
-                    _context.Update(message);
-                    await _context.SaveChangesAsync();
+                    await _messageService.UpdateMessageAsync(message);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MessageExists(message.Id))
+                    if (!await MessageExists(message.Id))
                     {
                         return NotFound();
                     }
@@ -134,22 +115,25 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SalarieId"] = new SelectList(_context.Salaries, "Email", "Nom", message.SalarieId);
             return View(message);
         }
 
+        private async Task<bool> MessageExists(int id)
+        {
+            var message = await _messageService.GetMessageByIdAsync(id);
+            return message != null;
+        }
+
         // GET: Messages/Delete/5
-        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Messages == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var message = await _context.Messages
-                .Include(m => m.Salarie)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var message = await _messageService.GetMessageByIdAsync(id.Value);
+
             if (message == null)
             {
                 return NotFound();
@@ -158,30 +142,20 @@ namespace AlimBio.Controllers.WEB
             return View(message);
         }
 
-
         // POST: Messages/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Messages == null)
+            var message = await _messageService.GetMessageByIdAsync(id);
+
+            if (message == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Messages'  is null.");
-            }
-            var message = await _context.Messages.FindAsync(id);
-            if (message != null)
-            {
-                _context.Messages.Remove(message);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            await _messageService.DeleteMessageAsync(message.Id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool MessageExists(int id)
-        {
-            return (_context.Messages?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

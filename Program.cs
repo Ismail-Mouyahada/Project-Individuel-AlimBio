@@ -43,6 +43,7 @@ namespace AlimBio
             builder.Services.AddScoped<IEntrepriseService, EntrepriseService>();
             builder.Services.AddScoped<ISiteService, SiteService>();
             builder.Services.AddScoped<IServiceService, ServiceService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
             builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
             builder.Services.Configure<SmtpSettings>(configuration);
             builder.Services.AddTransient<IEmailSender, EmailSender>();

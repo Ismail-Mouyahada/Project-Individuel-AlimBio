@@ -10,9 +10,10 @@ namespace AlimBio.Services
     {
 
         Task<IEnumerable<Salarie>> GetAllSalariesAsync();
+        Task<IEnumerable<Salarie>> GetSomeSalariesAsync(string? searchString = null);
         Task<Salarie> GetSalarieByIdAsync(int id);
-        Task CreateSalarieAsync(Salarie Salarie);
-        Task UpdateSalarieAsync(Salarie Salarie);
+        Task CreateSalarieAsync(Salarie Salarie, IFormFile Image);
+        Task UpdateSalarieAsync(Salarie salarie, IFormFile image);
         Task DeleteSalarieAsync(int id);
 
     }

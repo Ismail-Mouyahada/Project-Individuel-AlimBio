@@ -4,105 +4,100 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
-using Microsoft.AspNetCore.Authorization;
+using AlimBio.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlimBio.Controllers.WEB
 {
     public class SitesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ISiteService _SiteService;
+        private readonly IEntrepriseService _EntrepriseService;
+        private readonly IVilleService _VilleService;
 
-        public SitesController(ApplicationDbContext context)
+        public SitesController(ISiteService SiteService, IEntrepriseService EntrepriseService, IVilleService VilleService)
         {
-            _context = context;
+            _SiteService = SiteService;
+            _EntrepriseService = EntrepriseService;
+            _VilleService = VilleService;
         }
 
         // GET: Sites
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Sites.Include(s => s.Entreprise).Include(s => s.Ville);
-            return View(await applicationDbContext.ToListAsync());
+            var Sites = await _SiteService.GetAllSitesAsync();
+            return View(Sites);
         }
 
         // GET: Sites/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Sites == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var site = await _context.Sites
-                .Include(s => s.Entreprise)
-                .Include(s => s.Ville)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (site == null)
+            var Site = await _SiteService.GetSiteByIdAsync(id.Value);
+
+            if (Site == null)
             {
                 return NotFound();
             }
 
-            return View(site);
+            return View(Site);
         }
 
         // GET: Sites/Create
-        [Authorize]
         public IActionResult Create()
         {
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise");
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille");
+            ViewData["EntrepriseId"] = new SelectList(_EntrepriseService.GetAllEntreprisesAsync().Result, "Id", "NomEntreprise");
+            ViewData["VilleId"] = new SelectList(_VilleService.GetAllVillesAsync().Result, "Id", "NomVille");
             return View();
         }
 
         // POST: Sites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Siret,NomSite,Description,TypeSite,Statut,NombreEmployees,Capital,Adresse,Langitude,Largitude,Effectif,DateCreation,Tel,Email,SiteWeb,EntrepriseId,VilleId")] Site site)
+        public async Task<IActionResult> Create([Bind("Id,NomSite,CodePostal")] Site Site)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(site);
-                await _context.SaveChangesAsync();
+                await _SiteService.CreateSiteAsync(Site);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", site.EntrepriseId);
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille", site.VilleId);
-            return View(site);
+            return View(Site);
         }
 
         // GET: Sites/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Sites == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var site = await _context.Sites.FindAsync(id);
-            if (site == null)
+            var Site = await _SiteService.GetSiteByIdAsync(id.Value);
+
+            if (Site == null)
             {
                 return NotFound();
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", site.EntrepriseId);
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille", site.VilleId);
-            return View(site);
+
+            return View(Site);
         }
 
         // POST: Sites/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Siret,NomSite,Description,TypeSite,Statut,NombreEmployees,Capital,Adresse,Langitude,Largitude,Effectif,DateCreation,Tel,Email,SiteWeb,EntrepriseId,VilleId")] Site site)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomSite,CodePostal")] Site Site)
         {
-            if (id != site.Id)
+            if (id != Site.Id)
             {
                 return NotFound();
             }
@@ -111,12 +106,11 @@ namespace AlimBio.Controllers.WEB
             {
                 try
                 {
-                    _context.Update(site);
-                    await _context.SaveChangesAsync();
+                    await _SiteService.UpdateSiteAsync(Site);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SiteExists(site.Id))
+                    if (!await SiteExists(Site.Id))
                     {
                         return NotFound();
                     }
@@ -127,70 +121,48 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", site.EntrepriseId);
-            ViewData["VilleId"] = new SelectList(_context.Villes, "Id", "NomVille", site.VilleId);
-            return View(site);
+            return View(Site);
         }
 
-        [Authorize]
+        private Task<bool> SiteExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Sites == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var site = await _context.Sites
-                .Include(s => s.Entreprise)
-                .Include(s => s.Ville)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (site == null)
+            var Site = await _SiteService.GetSiteByIdAsync(id.Value);
+
+            if (Site == null)
             {
                 return NotFound();
             }
 
-            return View(site);
+            return View(Site);
         }
 
         // POST: Sites/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Sites == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            var Site = await _SiteService.GetSiteByIdAsync(id);
 
-            var site = await _context.Sites.FindAsync(id);
-
-            if (site == null)
+            if (Site == null)
             {
                 return NotFound();
             }
-            if (site != null)
-            {
-                _context.Sites.Remove(site);
-            }
 
-            if (_context.Salaries.Any(s => s.SiteId == id))
-            {
-                TempData["erreur"] = "Vous ne pouvez pas supprimer ce site, parce qu'il est associé avec des salariés.";
-                return RedirectToAction(nameof(Index));
-            }
-
-            _context.Sites.Remove(site);
-            await _context.SaveChangesAsync();
-
-            TempData["reussi"] = "le site a été supprimé avec succès.";
+            await _SiteService.DeleteSiteAsync(Site.Id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SiteExists(int id)
-        {
-            return (_context.Sites?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }

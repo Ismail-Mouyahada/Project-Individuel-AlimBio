@@ -4,39 +4,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using AlimBio.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlimBio.Controllers.WEB
 {
     public class VillesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IVilleService _villeService;
 
-        public VillesController(ApplicationDbContext context)
+        public VillesController(IVilleService villeService)
         {
-            _context = context;
+            _villeService = villeService;
         }
 
         // GET: Villes
         public async Task<IActionResult> Index()
         {
-            return _context.Villes != null ?
-                        View(await _context.Villes.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Villes'  is null.");
+            var villes = await _villeService.GetAllVillesAsync();
+            return View(villes);
         }
 
         // GET: Villes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Villes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var ville = await _context.Villes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ville = await _villeService.GetVilleByIdAsync(id.Value);
+
             if (ville == null)
             {
                 return NotFound();
@@ -53,15 +53,14 @@ namespace AlimBio.Controllers.WEB
 
         // POST: Villes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomVille,CodePostal")] Ville ville)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ville);
-                await _context.SaveChangesAsync();
+                await _villeService.CreateVilleAsync(ville);
                 return RedirectToAction(nameof(Index));
             }
             return View(ville);
@@ -70,22 +69,24 @@ namespace AlimBio.Controllers.WEB
         // GET: Villes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Villes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var ville = await _context.Villes.FindAsync(id);
+            var ville = await _villeService.GetVilleByIdAsync(id.Value);
+
             if (ville == null)
             {
                 return NotFound();
             }
+
             return View(ville);
         }
 
         // POST: Villes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NomVille,CodePostal")] Ville ville)
@@ -99,12 +100,11 @@ namespace AlimBio.Controllers.WEB
             {
                 try
                 {
-                    _context.Update(ville);
-                    await _context.SaveChangesAsync();
+                    await _villeService.UpdateVilleAsync(ville);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VilleExists(ville.Id))
+                    if (!await VilleExists(ville.Id))
                     {
                         return NotFound();
                     }
@@ -118,16 +118,21 @@ namespace AlimBio.Controllers.WEB
             return View(ville);
         }
 
+        private Task<bool> VilleExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: Villes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Villes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var ville = await _context.Villes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ville = await _villeService.GetVilleByIdAsync(id.Value);
+
             if (ville == null)
             {
                 return NotFound();
@@ -141,23 +146,17 @@ namespace AlimBio.Controllers.WEB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Villes == null)
+            var ville = await _villeService.GetVilleByIdAsync(id);
+
+            if (ville == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Villes'  is null.");
-            }
-            var ville = await _context.Villes.FindAsync(id);
-            if (ville != null)
-            {
-                _context.Villes.Remove(ville);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            await _villeService.DeleteVilleAsync(ville.Id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VilleExists(int id)
-        {
-            return (_context.Villes?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }

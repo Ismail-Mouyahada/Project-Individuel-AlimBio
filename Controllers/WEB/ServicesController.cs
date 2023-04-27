@@ -4,105 +4,96 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
-using Microsoft.AspNetCore.Authorization;
+using AlimBio.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlimBio.Controllers.WEB
 {
     public class ServicesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceService _ServiceService;
+        private readonly ISalarieService _SalarieService;
 
-        public ServicesController(ApplicationDbContext context)
+        public ServicesController(IServiceService ServiceService, ISalarieService SalarieService)
         {
-            _context = context;
+            _ServiceService = ServiceService;
+            _SalarieService = SalarieService;
         }
 
         // GET: Services
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Services.Include(s => s.Entreprise).Include(s => s.Site);
-            return View(await applicationDbContext.ToListAsync());
+            var Services = await _ServiceService.GetAllServicesAsync();
+            return View(Services);
         }
 
         // GET: Services/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Services == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var service = await _context.Services
-                .Include(s => s.Entreprise)
-                .Include(s => s.Site)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (service == null)
+            var Service = await _ServiceService.GetServiceByIdAsync(id.Value);
+
+            if (Service == null)
             {
                 return NotFound();
             }
 
-            return View(service);
+            return View(Service);
         }
 
         // GET: Services/Create
-        [Authorize]
         public IActionResult Create()
         {
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise");
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite");
             return View();
         }
 
         // POST: Services/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Couleur,Icon,NomService,Description,SiteId,EntrepriseId")] Service service)
+        public async Task<IActionResult> Create([Bind("Id,NomService,CodePostal")] Service Service)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(service);
-                await _context.SaveChangesAsync();
+                await _ServiceService.CreateServiceAsync(Service);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", service.EntrepriseId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", service.SiteId);
-            return View(service);
+            return View(Service);
         }
 
         // GET: Services/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Services == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var service = await _context.Services.FindAsync(id);
-            if (service == null)
+            var Service = await _ServiceService.GetServiceByIdAsync(id.Value);
+
+            if (Service == null)
             {
                 return NotFound();
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", service.EntrepriseId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", service.SiteId);
-            return View(service);
+
+            return View(Service);
         }
 
         // POST: Services/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Couleur,Icon,NomService,Description,SiteId,EntrepriseId")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomService,CodePostal")] Service Service)
         {
-            if (id != service.Id)
+            if (id != Service.Id)
             {
                 return NotFound();
             }
@@ -111,12 +102,11 @@ namespace AlimBio.Controllers.WEB
             {
                 try
                 {
-                    _context.Update(service);
-                    await _context.SaveChangesAsync();
+                    await _ServiceService.UpdateServiceAsync(Service);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServiceExists(service.Id))
+                    if (!await ServiceExists(Service.Id))
                     {
                         return NotFound();
                     }
@@ -127,66 +117,55 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EntrepriseId"] = new SelectList(_context.Entreprises, "Id", "NomEntreprise", service.EntrepriseId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "NomSite", service.SiteId);
-            return View(service);
+            return View(Service);
+        }
+
+        private Task<bool> ServiceExists(int id)
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Services/Delete/5
-        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Services == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var service = await _context.Services
-                .Include(s => s.Entreprise)
-                .Include(s => s.Site)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (service == null)
+            var Service = await _ServiceService.GetServiceByIdAsync(id.Value);
+
+            if (Service == null)
             {
                 return NotFound();
             }
 
-            return View(service);
+            return View(Service);
         }
 
         // POST: Services/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Services == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-            var service = await _context.Services.FindAsync(id);
-            if (service == null)
-            {
-                return NotFound();
-            }
-
-            if (_context.Salaries.Any(s => s.ServiceId == id))
+            var Service = await _ServiceService.GetServiceByIdAsync(id);
+            var Salaries = _SalarieService.GetAllSalariesAsync().Result;
+            if (Salaries.Any(s => s.ServiceId == id))
             {
                 TempData["erreur"] = "Vous ne pouvez pas supprimer ce service , parce que il est associer à des salarié.";
                 return RedirectToAction(nameof(Index));
             }
 
-            _context.Services.Remove(service);
-            await _context.SaveChangesAsync();
+            if (Service == null)
+            {
 
-            TempData["reussi"] = "Ce Service a été supprimé avec succès .";
+                return RedirectToAction(nameof(Index));
+            }
+
+            await _ServiceService.DeleteServiceAsync(Service.Id);
             return RedirectToAction(nameof(Index));
         }
 
 
-        private bool ServiceExists(int id)
-        {
-          return (_context.Services?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }
