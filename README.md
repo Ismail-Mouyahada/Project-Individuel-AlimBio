@@ -170,6 +170,10 @@ Modelisation de projet :
             le projet est lancer en local sur le port `:5216` suivant
             
             
-![yes-finally-5c6592](https://user-images.githubusercontent.com/66369128/234796787-7b9db497-7e64-4716-830a-d572b924bda4.jpg)
+ ![image](https://user-images.githubusercontent.com/66369128/234809236-abba864b-bd11-477f-aa7a-3f8e3bed056d.png)
 
-Merci pour toutes les personnes qui ont répondu à mes questions et de m'avoir inspirer avec leurs idées et savoir faire.
+
+Merci pour toutes les personnes qui ont répondu à mes questions et de m'avoir inspiré avec leurs idées et leur savoir faire.
+Pour faire des remarquer ou poser des questions veuillez utiliser cette formulaire : 
+
+https://public.zenkit.com/f/hw9-w2Yuo/observation-conseils-des-membre-de-la-jury-cesi?v=oxV0VZiUW
