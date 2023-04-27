@@ -1,8 +1,9 @@
 # Documentation de Projet AlimoBio
 
-+Cachiers des recettes :
  
 [Télécharger le cachier des recettes en cliquant sur ce lien ](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341774/Cachiers-recettes.xlsx)
+ 
+ [Documentation complete de projet sur Notion](https://chip-screw-15d.notion.site/Documentation-de-Projet-AlimoBio-c5fb3d64f65d4bcd89d914a0f44af283)
 
 # Modelisation de projet :
 
