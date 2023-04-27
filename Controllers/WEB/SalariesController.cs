@@ -36,7 +36,7 @@ namespace AlimBio.Controllers.WEB
             if (!string.IsNullOrEmpty(searchString))
             {
                 salaries = salaries.Where(s => s.Nom.Contains(searchString)
-                                               || s.Prenom.Contains(searchString) || s.Email.Contains(searchString) || s.Poste.Contains(searchString));
+                                               || s.Prenom.Contains(searchString) || s.Email.Contains(searchString) || s.Poste.Contains(searchString) || s.Service.NomService.Contains(searchString) || s.Site.NomSite.Contains(searchString));
             }
             return View(await salaries.ToListAsync());
         }

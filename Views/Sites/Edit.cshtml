@@ -51,11 +51,17 @@
                                 <input asp-for="Description" class="form-control" />
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="TypeSite" class="control-label"></label>
-                                <input asp-for="TypeSite" class="form-control" />
-                                <span asp-validation-for="TypeSite" class="text-danger"></span>
-                            </div>
+
+                             <select asp-for="TypeSite" class="form-control">
+                                    <option>Selectionner le type de site</option>
+                                    <option value="Site de production">Site de production</option>
+                                    <option value="Site de stockage">Site de stockage</option>
+                                    <option value="Site de fabrication">Site de fabrication</option>
+                                    <option value="Site d'usine">Site d'usine</option>
+
+                                    <option value="Siege">Siege</option>
+
+                                </select>
                             <div class="form-group">
                                 <label asp-for="Statut" class="control-label"></label>
                                 <input asp-for="Statut" class="form-control" />

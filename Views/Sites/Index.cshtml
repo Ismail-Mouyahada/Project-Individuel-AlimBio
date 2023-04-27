@@ -44,7 +44,7 @@
 
             @if (SignInManager.IsSignedIn(User))
             {
-                <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus"> + nouveau Site </i></a>
+                <a class="btn btn-green my-4" asp-action="Create"> <i class="bi bi-plus"></i> Nouveau Site </a>
             }
 
             <div class="row gy-4">
@@ -52,11 +52,10 @@
                 {
                     <div class="col-lg-6">
                         <div class="portfolio-info">
-                            <h3>Information - Service </h3>
+                            <h3>Information - Site  <label class="control-label ml-3">@Html.DisplayFor(modelItem => item.TypeSite) </label> </h3>
                             <ul>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.NomSite)     </b> :  @Html.DisplayFor(modelItem => item.NomSite)     </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Siret)       </b> :  @Html.DisplayFor(modelItem => item.Siret)       </li>
-                                <li> <b> @Html.DisplayNameFor(modelItem => item.TypeSite)    </b> :  @Html.DisplayFor(modelItem => item.TypeSite)    </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Email)       </b> :  @Html.DisplayFor(modelItem => item.Email)       </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Tel)         </b> :  @Html.DisplayFor(modelItem => item.Tel)         </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Description) </b> :  @Html.DisplayFor(modelItem => item.Description) </li>
@@ -64,7 +63,7 @@
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.SiteWeb)     </b> :  @Html.DisplayFor(modelItem => item.SiteWeb)     </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Statut)      </b> :  @Html.DisplayFor(modelItem => item.Statut)      </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Adresse)     </b> :  @Html.DisplayFor(modelItem => item.Adresse)     </li>
-                                <li> <b> @Html.DisplayNameFor(modelItem => item.Ville)       </b> :  @Html.DisplayFor(modelItem => item.Ville)       </li>
+                                <li> <b> @Html.DisplayNameFor(modelItem => item.Ville)       </b> :  @Html.DisplayFor(modelItem => item.Ville.NomVille)       </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.Effectif)    </b> :  @Html.DisplayFor(modelItem => item.Effectif)    </li>
                                 <li> <b> @Html.DisplayNameFor(modelItem => item.NombreEmployees) </b> :  @Html.DisplayFor(modelItem => item.NombreEmployees)</li>
                             </ul>

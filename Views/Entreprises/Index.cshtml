@@ -4,7 +4,7 @@
 @model IEnumerable<AlimBio.Models.Entreprise>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Liste des entreprises";
 }
 
 
@@ -38,9 +38,11 @@
                 {
                     <div class="col-lg-6">
                         <div class="portfolio-info">
-                            <h3>Information - Service </h3>
+                            <h3> @item.NomEntreprise </h3>
                             <ul>
-                                <li><strong>Nom de service</strong>:  @Html.DisplayNameFor(model => model.NomEntreprise)</li>
+                                <li><strong>Site web : </strong>  @item.SiteWeb</li>
+                                <li><strong>N° SIREN :</strong>  @item.Siren</li>
+
                             </ul>
                             <ul>
                                 <li>
@@ -59,9 +61,9 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="portfolio-description">
-                            <h2>Description de service</h2>
+                            <h2>Description de l'entreprise</h2>
                             <p>
-                                @Html.DisplayNameFor(model => item.AdresseComplet)
+                                @item.DescriptionActivite
                             </p>
                         </div>
                     </div>
