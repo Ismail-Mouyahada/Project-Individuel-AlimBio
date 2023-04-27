@@ -172,4 +172,4 @@ Modelisation de projet :
             
 ![yes-finally-5c6592](https://user-images.githubusercontent.com/66369128/234796787-7b9db497-7e64-4716-830a-d572b924bda4.jpg)
 
-Merci pour tous les personnes qui ont répondu à mes questions et de m'avoir inspirer avec leurs idées et savoir faire.
+Merci pour toutes les personnes qui ont répondu à mes questions et de m'avoir inspirer avec leurs idées et savoir faire.
