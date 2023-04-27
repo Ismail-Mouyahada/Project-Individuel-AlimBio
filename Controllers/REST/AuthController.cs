@@ -28,7 +28,7 @@ namespace AlimBio.Controllers.REST
         }
 
         [HttpPost]
-        public async Task<IActionResult> Connexion([FromBody] AuthUtilisateur utilisateur)
+        public async Task<IActionResult> Connexion([FromForm] AuthUtilisateur utilisateur)
         {
             if (!ModelState.IsValid)
             {
@@ -71,6 +71,7 @@ namespace AlimBio.Controllers.REST
                 token_type = "Bearer",
                 expires_in = TimeSpan.FromDays(7).TotalSeconds,
                 user_id = user.Id
+
             });
         }
     }

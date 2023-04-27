@@ -7,6 +7,8 @@
     ViewData["Title"] = "Index";
 }
 <main id="main">
+
+
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
@@ -22,6 +24,10 @@
         </div>
     </section><!-- End Breadcrumbs -->
     <!-- ======= Our Team Section ======= -->
+        <div class="section-title my-3" data-aos="fade-up">
+                <h2>Notre <strong>Equipe</strong></h2>
+                <p>retrouvez la liste des nos salariés , ils sont tous à votre dispositions pour les moindre question !</p>
+            </div>
     <section id="team" class="team section-bg">
 
         <div class="container">
@@ -36,10 +42,7 @@
                 <a class="btn btn-green my-2" asp-action="Create"> <i class="bi bi-plus">  </i> nouveau salarié </a>
             }
 
-            <div class="section-title" data-aos="fade-up">
-                <h2>Notre <strong>Equipe</strong></h2>
-                <p>retrouvez la liste des nos salariés , ils sont tous à votre dispositions pour les moindre question !</p>
-            </div>
+
             <div class="row">
                 @foreach (var item in Model)
                 {

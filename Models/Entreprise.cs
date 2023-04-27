@@ -1,4 +1,7 @@
-﻿namespace AlimBio.Models
+﻿
+using Microsoft.OpenApi.Attributes;
+
+namespace AlimBio.Models
 {
     public class Entreprise
     {

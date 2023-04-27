@@ -53,7 +53,7 @@ namespace AlimBio.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "se rappeler de moi ?")]
+            [Display(Name = "Je veux garder ma session vivante ?")]
             public bool RememberMe { get; set; }
         }
 

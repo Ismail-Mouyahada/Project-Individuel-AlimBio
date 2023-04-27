@@ -26,8 +26,11 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
-
-    <section id="contact" class="contact">
+    <div class="section-title pt-3" data-aos="fade-up">
+                <h2>Geo <strong>localisation</strong></h2>
+                <p> liste des entreprise don't entre entreprise est présente.</p>
+            </div>
+    <section id="contact" class="contact pt-0">
         <div class="container">
             @if (SignInManager.IsSignedIn(User))
             {
@@ -53,7 +56,7 @@
                                 </div>
                                 <div>
 
-                                   
+
                                     <a class="btn btn-green" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-eye"></span></a>
 
                                     @if (SignInManager.IsSignedIn(User))
@@ -68,7 +71,7 @@
                     </div>
                 }
 
- 
+
             </div>
         </div>
     </section><!-- End Contact Section -->

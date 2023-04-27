@@ -1,8 +1,14 @@
+using System.Configuration;
 using AlimBio.Data;
 using AlimBio.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using AlimBio.Models;
+using AlimBio.Views.Services;
 
 namespace AlimBio
 {
@@ -26,13 +32,20 @@ namespace AlimBio
         private static void AddServices(WebApplicationBuilder builder)
         {
             var ConnectionToMysqlStr = builder.Configuration.GetConnectionString("MySQLConntectionStr") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
+            IConfiguration configuration = builder.Configuration.GetSection("SmtpSettings");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseMySql(ConnectionToMysqlStr, ServerVersion.AutoDetect(ConnectionToMysqlStr));
             });
 
             builder.Services.AddScoped<IVilleService, VilleService>();
+            builder.Services.AddScoped<ISalarieService, SalarieService>();
+            builder.Services.AddScoped<IEntrepriseService, EntrepriseService>();
+            builder.Services.AddScoped<ISiteService, SiteService>();
+            builder.Services.AddScoped<IServiceService, ServiceService>();
+            builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
+            builder.Services.Configure<SmtpSettings>(configuration);
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddSwaggerGen(c =>
             {
@@ -79,6 +92,7 @@ namespace AlimBio
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireLowercase = true;
+                options.SignIn.RequireConfirmedAccount = false;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultUI()
@@ -91,6 +105,7 @@ namespace AlimBio
                 options.LoginPath = "/Identity/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
+
             });
         }
 

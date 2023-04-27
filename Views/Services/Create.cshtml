@@ -35,14 +35,35 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
                                 <label asp-for="Couleur" class="control-label"></label>
-                                <input type="color" asp-for="Couleur" class="form-control" />
+                                <input type="color" asp-for="Couleur" class="form-control p-0 m-0" />
                                 <span  asp-validation-for="Couleur" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
-                                <label asp-for="Icon" class="control-label"></label>
-                                <input asp-for="Icon" class="form-control icp icp-auto" value="fas fa-anchor" />
-                                <span asp-validation-for="Icon" class="text-danger"></span>
+                                <label class="control-label">Icon (de service ) </label>
+                                <select class="form-control" id="Icon" name="Icon">
+                                    <option value="">No icon</option>
+                                    <option value="fa fa-user">  <i class=" text-gray fa fa-user"></i> </i>            </option>
+                                    <option  value="fa fa-search"> <i class=" text-gray fa fa-search"></i> </i>            </option>
+                                    <option  value="fa fa-right-dir"> <i class=" text-gray fa fa-right-dir"></i> </i>            </option>
+                                    <option  value="fa fa-star"> <i class=" text-gray fa fa-star"></i> </i>            </option>
+                                    <option  value="fa fa-cancel"> <i class=" text-gray fa fa-cancel"></i> </i>            </option>
+                                    <option  value="fa fa-help-circled"> <i class=" text-gray fa fa-help-circled"></i> </i>            </option>
+                                    <option  value="fa fa-info-circled"> <i class=" text-gray fa fa-info-circled"></i> </i>            </option>
+                                    <option  value="fa fa-eye"> <i class=" text-gray fa fa-eye"></i> </i>            </option>
+                                    <option  value="fa fa-tag"> <i class=" text-gray fa fa-tag"></i> </i>            </option>
+                                    <option  value="fa fa-bookmark"> <i class=" text-gray fa fa-bookmark"></i> </i>            </option>
+                                    <option  value="fa fa-heart"> <i class=" text-gray fa fa-heart"></i> </i>            </option>
+                                    <option  value="fa fa-thumbs-down-alt"> <i class=" text-gray fa fa-thumbs-down-alt"></i> </i>            </option>
+                                    <option  value="fa fa-upload-cloud"> <i class=" text-gray fa fa-upload-cloud"></i> </i>            </option>
+                                    <option  value="fa fa-phone-squared"> <i class=" text-gray fa fa-phone-squared"></i> </i>            </option>
+                                    <option  value="fa fa-cong"> <i class=" text-gray fa fa-cog"></i> </i>            </option>
+                                    <option  value="fa fa-wrench"> <i class=" text-gray fa fa-wrench"></i> </i>            </option>
+
+                                    <option  value="fa fa-"> <i class=" text-gray fa fa-thumbs-up-alt"></i> </i>            </option>
+                                </select>
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="NomService" class="control-label"></label>
                                 <input asp-for="NomService" class="form-control" />
@@ -78,6 +99,33 @@
 
 </main><!-- End #main -->
 
+<!-- JavaScript -->
+<script type="text/javascript">
+
+	jQuery(document).ready(function($) {
+		$('#Icon').fontIconPicker({
+                            theme              : 'fip-grey',              // The CSS theme to use with this fontIconPicker. You can set different themes on multiple elements on the same page
+                            source             : false,                   // Icons source (array|false|object)
+                            emptyIcon          : true,                    // Empty icon should be shown?
+                            emptyIconValue     : '',                      // The value of the empty icon, change if you select has something else, say "none"
+                            autoClose          : true,                    // Whether or not to close the FIP automatically when clicked outside
+                            iconsPerPage       : 20,                      // Number of icons per page
+                            hasSearch          : true,                    // Is search enabled?
+                            searchSource       : false,                   // Give a manual search values. If using attributes then for proper search feature we also need to pass icon names under the same order of source
+                            appendTo           : 'self',                  // Where to append the selector popup. You can pass string selectors or jQuery objects
+                            useAttribute       : false,                   // Whether to use attribute selector for printing icons
+                            attributeName      : 'data-icon',             // HTML Attribute name
+                            convertToHex       : true,                    // Whether or not to convert to hexadecimal for attribute value. If true then please pass decimal integer value to the source (or as value="" attribute of the select field)
+                            allCategoryText    : 'From all categories',   // The text for the select all category option
+                            unCategorizedText  : 'Uncategorized',         // The text for the select uncategorized option
+                            iconGenerator      : null,                    // Icon Generator function. Passes, item, flipBoxTitle and index
+                            windowDebounceDelay: 150,                     // Debounce delay while fixing position on windowResize
+                            searchPlaceholder  : 'Search Icons'           // Placeholder for the search input
+                        });
+
+
+	});
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

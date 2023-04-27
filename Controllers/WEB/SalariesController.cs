@@ -192,38 +192,13 @@ namespace AlimBio.Controllers.WEB
 
                         // Save the path to the image in the database
                         salarie.Image = $"/images/{uniqueFileName}";
-                    } else
+                    }
+                    else
                     {
                         salarie.Image = "/images/unconnu.jpeg";
                     }
 
-                    // if (Image != null && Image.Length > 0)
-                    // {
-                    //     // Create a unique filename for the image
-                    //     var uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
 
-                    //     // Get the path to the wwwroot folder
-                    //     var wwwRootPath = _webHostEnvironment.WebRootPath;
-
-                    //     // Combine the wwwroot path with the unique filename to get the full path to save the image
-                    //     var imagePath = Path.Combine(wwwRootPath, "images", uniqueFileName);
-
-                    //     // Create the images directory if it does not exist
-                    //     var imagesDirectory = Path.Combine(wwwRootPath, "images");
-                    //     if (!Directory.Exists(imagesDirectory))
-                    //     {
-                    //         Directory.CreateDirectory(imagesDirectory);
-                    //     }
-
-                    //     // Save the image to the file system
-                    //     using (var fileStream = new FileStream(imagePath, FileMode.Create))
-                    //     {
-                    //         Image.CopyTo(fileStream);
-                    //     }
-
-                    //     // Save the path to the image in the database
-                    //     salarie.Image = $"/images/{uniqueFileName}";
-                    // }
                     _context.Update(salarie);
                     await _context.SaveChangesAsync();
                 }
