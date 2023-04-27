@@ -175,6 +175,8 @@ Modelisation de projet :
 
 Merci pour toutes les personnes qui ont répondu à mes questions et de m'avoir inspiré avec leurs idées et leur savoir faire.
 
-##Pour faire des remarques ou poser des questions veuillez utiliser cette formulaire : 
+## Pour faire des remarques ou poser des questions veuillez utiliser cette formulaire : 
 
-``` https://public.zenkit.com/f/hw9-w2Yuo/observation-conseils-des-membre-de-la-jury-cesi?v=oxV0VZiUW ```
+    
+    https://public.zenkit.com/f/hw9-w2Yuo/observation-conseils-des-membre-de-la-jury-cesi?v=oxV0VZiUW  
+    
