@@ -30,21 +30,42 @@
         <div class="container" data-aos="fade-up">
             <div class="row gy-4">
                 <div class="col-lg-6">
-                    <div class="portfolio-info">
+                    <div class="Service-info">
                         <h3>Creation - Service </h3>
-                        <form asp-action="Edit">
+                         <form asp-action="Edit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="Id" />
                             <div class="form-group">
                                 <label asp-for="Couleur" class="control-label"></label>
-                                <input asp-for="Couleur" type="color" class="form-control border-0 p-0" />
-                                <span asp-validation-for="Couleur" class="text-danger"></span>
+                                <input type="color" asp-for="Couleur" class="form-control p-0 m-0" />
+                                <span  asp-validation-for="Couleur" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
-                                <label asp-for="Icon" class="control-label"></label>
-                                <input asp-for="Icon" class="form-control" />
-                                <span asp-validation-for="Icon" class="text-danger"></span>
+                                <label class="control-label">Icon (de service ) </label>
+                            <select class="form-control" id="Icon" name="Icon">
+                                <option value="">Pas d'icône</option>
+                                <option value="fa fa-user">Utilisateur</option>
+                                <option value="fa fa-search">Loupe de recherche</option>
+                                <option value="fa fa-right-dir">Flèche droite</option>
+                                <option value="fa fa-star">Étoile</option>
+                                <option value="fa fa-cancel">Croix</option>
+                                <option value="fa fa-help-circled">Point d'interrogation</option>
+                                <option value="fa fa-info-circled">Information</option>
+                                <option value="fa fa-eye">Œil</option>
+                                <option value="fa fa-tag">Étiquette</option>
+                                <option value="fa fa-bookmark">Signet</option>
+                                <option value="fa fa-heart">Cœur</option>
+                                <option value="fa fa-thumbs-down-alt">Pouce vers le bas</option>
+                                <option value="fa fa-upload-cloud">Nuage de téléchargement</option>
+                                <option value="fa fa-phone-squared">Téléphone carré</option>
+                                <option value="fa fa-cog">Roue crantée</option>
+                                <option value="fa fa-wrench">Clé anglaise</option>
+                                <option value="fa fa-thumbs-up-alt">Pouce vers le haut</option>
+                            </select>
+
+
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="NomService" class="control-label"></label>
                                 <input asp-for="NomService" class="form-control" />
@@ -52,18 +73,16 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="Description" class="control-label"></label>
-                                <input asp-for="Description" class="form-control" />
+                                <input asp-for="Description" class="form-control"  aria-multiline="true" />
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="SiteId" class="control-label"></label>
-                                <select asp-for="SiteId" class="form-control" asp-items="ViewBag.SiteId"></select>
-                                <span asp-validation-for="SiteId" class="text-danger"></span>
+                                <label  class="control-label">Nom de site (assigné à ) </label>
+                                <select asp-for="SiteId" class ="form-control" asp-items="ViewBag.SiteId"></select>
                             </div>
                             <div class="form-group">
-                                <label asp-for="EntrepriseId" class="control-label"></label>
-                                <select asp-for="EntrepriseId" class="form-control" asp-items="ViewBag.EntrepriseId"></select>
-                                <span asp-validation-for="EntrepriseId" class="text-danger"></span>
+                                <label   class="control-label"> Nom de l'entreprise (assigné à ) </label>
+                                <select asp-for="EntrepriseId" class ="form-control" asp-items="ViewBag.EntrepriseId"></select>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Soumettre" class="btn btn-green my-2" />
@@ -81,7 +100,7 @@
     </section><!-- End   Details Section -->
 
 </main><!-- End #main -->
- 
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

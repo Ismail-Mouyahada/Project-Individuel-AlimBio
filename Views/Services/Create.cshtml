@@ -41,27 +41,28 @@
 
                             <div class="form-group">
                                 <label class="control-label">Icon (de service ) </label>
-                                <select class="form-control" id="Icon" name="Icon">
-                                    <option value="">No icon</option>
-                                    <option value="fa fa-user">  <i class=" text-gray fa fa-user"></i> </i>            </option>
-                                    <option  value="fa fa-search"> <i class=" text-gray fa fa-search"></i> </i>            </option>
-                                    <option  value="fa fa-right-dir"> <i class=" text-gray fa fa-right-dir"></i> </i>            </option>
-                                    <option  value="fa fa-star"> <i class=" text-gray fa fa-star"></i> </i>            </option>
-                                    <option  value="fa fa-cancel"> <i class=" text-gray fa fa-cancel"></i> </i>            </option>
-                                    <option  value="fa fa-help-circled"> <i class=" text-gray fa fa-help-circled"></i> </i>            </option>
-                                    <option  value="fa fa-info-circled"> <i class=" text-gray fa fa-info-circled"></i> </i>            </option>
-                                    <option  value="fa fa-eye"> <i class=" text-gray fa fa-eye"></i> </i>            </option>
-                                    <option  value="fa fa-tag"> <i class=" text-gray fa fa-tag"></i> </i>            </option>
-                                    <option  value="fa fa-bookmark"> <i class=" text-gray fa fa-bookmark"></i> </i>            </option>
-                                    <option  value="fa fa-heart"> <i class=" text-gray fa fa-heart"></i> </i>            </option>
-                                    <option  value="fa fa-thumbs-down-alt"> <i class=" text-gray fa fa-thumbs-down-alt"></i> </i>            </option>
-                                    <option  value="fa fa-upload-cloud"> <i class=" text-gray fa fa-upload-cloud"></i> </i>            </option>
-                                    <option  value="fa fa-phone-squared"> <i class=" text-gray fa fa-phone-squared"></i> </i>            </option>
-                                    <option  value="fa fa-cong"> <i class=" text-gray fa fa-cog"></i> </i>            </option>
-                                    <option  value="fa fa-wrench"> <i class=" text-gray fa fa-wrench"></i> </i>            </option>
+                            <select class="form-control" id="Icon" name="Icon">
+                                <option value="">Pas d'icône</option>
+                                <option value="fa fa-user">Utilisateur</option>
+                                <option value="fa fa-search">Loupe de recherche</option>
+                                <option value="fa fa-right-dir">Flèche droite</option>
+                                <option value="fa fa-star">Étoile</option>
+                                <option value="fa fa-cancel">Croix</option>
+                                <option value="fa fa-help-circled">Point d'interrogation</option>
+                                <option value="fa fa-info-circled">Information</option>
+                                <option value="fa fa-eye">Œil</option>
+                                <option value="fa fa-tag">Étiquette</option>
+                                <option value="fa fa-bookmark">Signet</option>
+                                <option value="fa fa-heart">Cœur</option>
+                                <option value="fa fa-thumbs-down-alt">Pouce vers le bas</option>
+                                <option value="fa fa-upload-cloud">Nuage de téléchargement</option>
+                                <option value="fa fa-phone-squared">Téléphone carré</option>
+                                <option value="fa fa-cog">Roue crantée</option>
+                                <option value="fa fa-wrench">Clé anglaise</option>
+                                <option value="fa fa-thumbs-up-alt">Pouce vers le haut</option>
+                            </select>
 
-                                    <option  value="fa fa-"> <i class=" text-gray fa fa-thumbs-up-alt"></i> </i>            </option>
-                                </select>
+
                             </div>
 
                             <div class="form-group">
@@ -83,7 +84,7 @@
                                 <select asp-for="EntrepriseId" class ="form-control" asp-items="ViewBag.EntrepriseId"></select>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Soumettre" class="btn btn-green my-2" />
+                                <input type="submit" value="Créer" class="btn btn-green my-2" />
                             </div>
                         </form>
 

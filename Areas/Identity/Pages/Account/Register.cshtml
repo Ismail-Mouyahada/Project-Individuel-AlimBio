@@ -6,8 +6,8 @@
 @{
     ViewData["Title"] = "Inscription";
 }
- @* @if (SignInManager.IsSignedIn(User))
- { *@
+ @if (SignInManager.IsSignedIn(User))
+ {
 <main id="main">
     <!-- ======= Breadcrumbs ======= --->
     <section id="breadcrumbs" class="breadcrumbs">
@@ -66,7 +66,7 @@
 
    </main>
 
-   @* }else{
+  }else{
 
     <main id="main">
         <!-- ======= Breadcrumbs ======= -->
@@ -109,4 +109,4 @@
 
 
 
-                } *@
+                }

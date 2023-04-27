@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
- 
+
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -15,7 +15,7 @@
                 <ol>
                     <li><a href="#">Midifier</a></li>
                     <li><a href="#">Entreprises </a></li>
-                    
+
                 </ol>
             </div>
 
@@ -28,9 +28,10 @@
                 <div class="col-lg-6">
                     <div class="portfolio-info">
                         <h3>Information - Entreprise </h3>
-                        <form asp-action="Edit">
+
+                         <button type="button" class="btn btn-green my-2" id="autoFillButton" > + Auto-complter la formulaire</button>
+                         <form asp-action="Edit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="Id" />
                             <div class="form-group">
                                 <label asp-for="Siren" class="control-label"></label>
                                 <input asp-for="Siren" class="form-control" />
@@ -46,11 +47,14 @@
                                 <input asp-for="DescriptionActivite" class="form-control" />
                                 <span asp-validation-for="DescriptionActivite" class="text-danger"></span>
                             </div>
+
+
                             <div class="form-group">
                                 <label asp-for="PersonneMoral" class="control-label"></label>
                                 <input asp-for="PersonneMoral" class="form-control" />
                                 <span asp-validation-for="PersonneMoral" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="SiretSiege" class="control-label"></label>
                                 <input asp-for="SiretSiege" class="form-control" />
@@ -96,26 +100,30 @@
                                 <input asp-for="Region" class="form-control" />
                                 <span asp-validation-for="Region" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div id="map"></div>
+                            <div class="form-group d-none">
                                 <label asp-for="Lattitude" class="control-label"></label>
                                 <input asp-for="Lattitude" class="form-control" />
                                 <span asp-validation-for="Lattitude" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label asp-for="Langitude" class="control-label"></label>
                                 <input asp-for="Langitude" class="form-control" />
                                 <span asp-validation-for="Langitude" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="DateCreation" class="control-label"></label>
-                                <input asp-for="DateCreation" class="form-control" />
+                                <input asp-for="DateCreation"   class="form-control" />
                                 <span asp-validation-for="DateCreation" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+
+
+                             <div class="form-group">
                                 <label asp-for="EntrepriseEmployeuse" class="control-label"></label>
                                 <input asp-for="EntrepriseEmployeuse" class="form-control" />
                                 <span asp-validation-for="EntrepriseEmployeuse" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="Capital" class="control-label"></label>
                                 <input asp-for="Capital" class="form-control" />
@@ -126,11 +134,14 @@
                                 <input asp-for="Effectif" class="form-control" />
                                 <span asp-validation-for="Effectif" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+
+
+                              <div class="form-group">
                                 <label asp-for="InscritRcs" class="control-label"></label>
                                 <input asp-for="InscritRcs" class="form-control" />
                                 <span asp-validation-for="InscritRcs" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="SiteWeb" class="control-label"></label>
                                 <input asp-for="SiteWeb" class="form-control" />
@@ -142,15 +153,15 @@
                                 <span asp-validation-for="ImmatriculationTva" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Soumettre" class="btn btn-green my-2" />
+                                <input type="submit" value="Appliquer" class="btn btn-green my-2" />
                             </div>
                         </form>
-                        
+
                         <div>
                             <a class="btn btn-green my-2" asp-action="Index"> <i class="fa fa-arrow-left"></i></a>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -158,9 +169,89 @@
     </section><!-- End   Details Section -->
 
 </main><!-- End #main -->
- 
- 
- 
+ <script>
+const sirenInput = document.querySelector("#Siren");
+const nomEntrepriseInput = document.querySelector("#NomEntreprise");
+const descriptionActiviteInput = document.querySelector("#DescriptionActivite");
+const personneMoralInput = document.querySelector("#PersonneMoral");
+const siretSiegeInput = document.querySelector("#SiretSiege");
+const nicInput = document.querySelector("#Nic");
+const numeroVoieInput = document.querySelector("#NumeroVoie");
+const libelleVoieInput = document.querySelector("#LibelleVoie");
+const complementAdresseInput = document.querySelector("#ComplementAdresse");
+const adresseCompletInput = document.querySelector("#AdresseComplet");
+const codePostalInput = document.querySelector("#CodePostal");
+const villeInput = document.querySelector("#Ville");
+const regionInput = document.querySelector("#Region");
+const lattitudeInput = document.querySelector("#Lattitude");
+const longitudeInput = document.querySelector("#Langitude");
+const dateCreationInput = document.querySelector("#DateCreation");
+const entrepriseEmployeuseInput = document.querySelector("#EntrepriseEmployeuse");
+const capitalInput = document.querySelector("#Capital");
+const effectifInput = document.querySelector("#Effectif");
+const inscritRcsInput = document.querySelector("#InscritRcs");
+const siteWebInput = document.querySelector("#SiteWeb");
+const immatriculationTvaInput = document.querySelector("#ImmatriculationTva");
+const date = new Date().toISOString().slice(0,10)
+const autoFillButton = document.querySelector("#autoFillButton");
+autoFillButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    const siren = document.querySelector("#Siren").value;
+    const url = `https://api.pappers.fr/v2/recherche?siren=${siren}&api_token=97a405f1664a83329a7d89ebf51dc227b90633c4ba4a2575&page=1`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const resultats = data.resultats;
+            if (resultats.length > 0) {
+                const entreprise = resultats[0];
+                document.querySelector("#NomEntreprise").value = entreprise.nom_entreprise;
+                document.querySelector("#DescriptionActivite").value = entreprise.domaine_activite;
+                document.querySelector("#PersonneMoral").value = entreprise.personne_morale ? true : false;
+                document.querySelector("#SiretSiege").value = entreprise.siege.siret;
+                document.querySelector("#Nic").value = entreprise.siege.nic;
+                document.querySelector("#NumeroVoie").value = entreprise.siege.numero_voie;
+                document.querySelector("#LibelleVoie").value = entreprise.siege.libelle_voie;
+                document.querySelector("#ComplementAdresse").value =  `${entreprise.siege.numero_voie} ${entreprise.siege.libelle_voie} ${entreprise.siege.ville} ${entreprise.siege.code_postal}  `;
+                document.querySelector("#AdresseComplet").value = entreprise.siege.adresse_ligne_1;
+                document.querySelector("#CodePostal").value = entreprise.siege.code_postal;
+                document.querySelector("#DateCreation").value = entreprise.date_creation;
+                document.querySelector("#Ville").value = entreprise.siege.ville;
+                document.querySelector("#Region").value = entreprise.siege.pays;
+                document.querySelector("#Lattitude").value = entreprise.siege.latitude;
+                document.querySelector("#Langitude").value = entreprise.siege.longitude;
+                document.querySelector("#EntrepriseEmployeuse").value = entreprise.entreprise_employeuse? true :false;
+                document.querySelector("#Capital").value = entreprise.capital;
+                document.querySelector("#Effectif").value = entreprise.effectif ? entreprise.effectif :1;
+                document.querySelector("#InscritRcs").value = entreprise.statut_rcs ? true : false;
+                document.querySelector("#SiteWeb").value = `www.${entreprise.nom_entreprise.trim.trim()}.fr`;
+                document.querySelector("#ImmatriculationTva").value = entreprise.numero_tva_intracommunautaire;
+            }
+        })
+        .catch(error => console.error(error));
+});
+
+mapboxgl.accessToken = 'pk.eyJ1IjoieWlsYWs3MjY4MSIsImEiOiJjbGd2OWRxb3kxbGliM2dvMmw0bHcwanZ6In0.PTmeHh2OTeHuGbgGfOS8_w';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [2.35, 48.86],
+    zoom: 12
+});
+
+map.on('click', function(e) {
+    var lngLat = e.lngLat;
+    document.getElementById('Lattitude').value = lngLat.lat;
+    document.getElementById('Langitude').value = lngLat.lng;
+
+    // Add a marker at the clicked location
+    var marker = new mapboxgl.Marker()
+        .setLngLat([lngLat.lng, lngLat.lat])
+        .addTo(map);
+});
+</script>
+
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

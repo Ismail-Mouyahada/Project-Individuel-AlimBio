@@ -54,27 +54,28 @@ namespace AlimBio.Areas.Identity.Pages.Account
 
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "E-mail")]
             public string Email { get; set; }
             [Required]
             [StringLength(100, ErrorMessage = "le {0} devrait être en moins {2} et maximum {1} de caracters.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Mot de passe")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirmer le mot de passe")]
             [Compare("Password", ErrorMessage = " le mot de passe n'est identique.")]
             public string ConfirmPassword { get; set; }
         }
 
-
+        [Authorize]
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        [Authorize]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -123,6 +124,7 @@ namespace AlimBio.Areas.Identity.Pages.Account
             return Page();
         }
 
+        [Authorize]
         private IdentityUser CreateUser()
         {
             try
@@ -136,7 +138,7 @@ namespace AlimBio.Areas.Identity.Pages.Account
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
-
+        [Authorize]
         private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
