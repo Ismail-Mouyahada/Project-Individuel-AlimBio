@@ -1,8 +1,27 @@
-
- ![chrome-capture-2023-3-23](https://user-images.githubusercontent.com/66369128/234797510-157b27cc-845b-411d-8fe4-6b8d2679b932.gif)
-
-
 # Documentation de Projet AlimoBio
+
+
+Modelisation de projet :
+### UML :
++  UML | Cas d'usage : 
+[UML-Cas-Usage-Alimbio.pdf](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341306/UML-Cas-Usage-Alimbio.pdf)
+
++ UML | Cas d'activité : 
+[UML-Cas-Activités-Alimbio.pdf](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341320/UML-Cas-Activites-Alimbio.pdf)
+
++ UML | Cas des Classes : 
+[UML-Cas-Classes-Alimbio.pdf](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341322/UML-Cas-Classes-Alimbio.pdf)
+
+
+### MCD
++ MCD | Model conceptuel des données :
+ 
+![MCD-alimobio](https://user-images.githubusercontent.com/66369128/234806491-7e6fc68f-75b1-489a-9295-1681c9abcb50.png)
+
+## Vue de projet :
+![chrome-capture-2023-3-23](https://user-images.githubusercontent.com/66369128/234797510-157b27cc-845b-411d-8fe4-6b8d2679b932.gif)
+
+
 
 **Projet d’une application de type annuaire d’entreprise en [A](http://Asp.net)SP.net core 7 avec un API (Bonus)**
 
@@ -152,3 +171,5 @@
             
             
 ![yes-finally-5c6592](https://user-images.githubusercontent.com/66369128/234796787-7b9db497-7e64-4716-830a-d572b924bda4.jpg)
+
+Merci pour tous les personnes qui ont répondu à mes questions et de m'avoir inspirer avec leurs idées et savoir faire.
