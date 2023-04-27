@@ -1,9 +1,12 @@
 # Documentation de Projet AlimoBio
 
 +Cachiers des recettes :
-[Cachiers-recettes.ods](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341739/Cachiers-recettes.ods)
+ 
+[Télécharger le cachier des recettes en cliquant sur ce lien ](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341774/Cachiers-recettes.xlsx)
 
-Modelisation de projet :
+# Modelisation de projet :
+
+
 ### UML :
 +  UML | Cas d'usage : 
 [UML-Cas-Usage-Alimbio.pdf](https://github.com/Ismail-Mouyahada/Project-Individuel-AlimBio/files/11341306/UML-Cas-Usage-Alimbio.pdf)
