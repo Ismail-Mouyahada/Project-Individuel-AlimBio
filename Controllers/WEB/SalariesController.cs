@@ -66,6 +66,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Salaries/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["EntrepriseId"] = new SelectList(_entrepriseService.GetAllEntreprisesAsync().Result, "Id", "NomEntreprise");
@@ -77,12 +78,16 @@ namespace AlimBio.Controllers.WEB
         // POST: Salaries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile? Image)
         {
             if (ModelState.IsValid)
             {
+                ViewData["EntrepriseId"] = new SelectList(_entrepriseService.GetAllEntreprisesAsync().Result, "Id", salarie.EntrepriseId.ToString());
+                ViewData["ServiceId"] = new SelectList(_serviceService.GetAllServicesAsync().Result, "Id", salarie.ServiceId.ToString());
+                ViewData["SiteId"] = new SelectList(_siteService.GetAllSitesAsync().Result, "Id", salarie.SiteId.ToString());
                 await _salarieService.CreateSalarieAsync(salarie, Image);
                 return RedirectToAction(nameof(Index));
             }
@@ -90,6 +95,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Salaries/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,6 +116,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Salaries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Prenom,Poste,Email,Mobile,Fix,Adresse,CodePostal,Ville,Pays,ServiceId,EntrepriseId,SiteId")] Salarie salarie, IFormFile? image)
@@ -148,6 +155,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Salaries/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -166,6 +174,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // POST: Salaries/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

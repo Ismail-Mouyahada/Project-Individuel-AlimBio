@@ -8,6 +8,7 @@ using AlimBio.Data;
 using AlimBio.Models;
 using AlimBio.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -54,6 +55,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Messages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Sujet,Details")] Message message)
@@ -66,6 +68,7 @@ namespace AlimBio.Controllers.WEB
             return View(message);
         }
 
+        [Authorize]
         // GET: Messages/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,6 +87,7 @@ namespace AlimBio.Controllers.WEB
             return View(message);
         }
 
+        [Authorize]
         // POST: Messages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
@@ -124,6 +128,7 @@ namespace AlimBio.Controllers.WEB
             return message != null;
         }
 
+        [Authorize]
         // GET: Messages/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -142,6 +147,7 @@ namespace AlimBio.Controllers.WEB
             return View(message);
         }
 
+        [Authorize]
         // POST: Messages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

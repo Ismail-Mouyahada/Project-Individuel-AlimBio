@@ -44,7 +44,10 @@
                         <ul>
                             <li>
                                 <a class="btn btn-primary" asp-action="Index"><i class="fas fa-arrow-left"></i></a>
+                                 @if (SignInManager.IsSignedIn(User))
+                                {
                                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id"><i class="fas fa-pen text-white"></i></a>
+                                }
                             </li>
 
                         </ul>

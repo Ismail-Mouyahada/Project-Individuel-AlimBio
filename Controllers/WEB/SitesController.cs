@@ -8,6 +8,7 @@ using AlimBio.Data;
 using AlimBio.Models;
 using AlimBio.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -50,6 +51,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Sites/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["EntrepriseId"] = new SelectList(_EntrepriseService.GetAllEntreprisesAsync().Result, "Id", "NomEntreprise");
@@ -60,6 +62,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Sites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomSite,CodePostal")] Site Site)
@@ -71,7 +74,7 @@ namespace AlimBio.Controllers.WEB
             }
             return View(Site);
         }
-
+        [Authorize]
         // GET: Sites/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -93,6 +96,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Sites/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NomSite,CodePostal")] Site Site)
@@ -130,6 +134,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Sites/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +153,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // POST: Sites/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

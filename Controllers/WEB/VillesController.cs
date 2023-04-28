@@ -8,6 +8,7 @@ using AlimBio.Data;
 using AlimBio.Models;
 using AlimBio.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
@@ -46,6 +47,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Villes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +56,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Villes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomVille,CodePostal")] Ville ville)
@@ -67,6 +70,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Villes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,6 +91,7 @@ namespace AlimBio.Controllers.WEB
         // POST: Villes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NomVille,CodePostal")] Ville ville)
@@ -124,6 +129,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // GET: Villes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +148,7 @@ namespace AlimBio.Controllers.WEB
         }
 
         // POST: Villes/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

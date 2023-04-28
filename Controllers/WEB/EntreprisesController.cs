@@ -4,50 +4,50 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using AlimBio.Data;
 using AlimBio.Models;
+using AlimBio.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
 namespace AlimBio.Controllers.WEB
 {
     public class EntreprisesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IEntrepriseService _EntrepriseService;
 
-        public EntreprisesController(ApplicationDbContext context)
+        public EntreprisesController(IEntrepriseService EntrepriseService)
         {
-            _context = context;
+            _EntrepriseService = EntrepriseService;
         }
 
         // GET: Entreprises
         public async Task<IActionResult> Index()
         {
-              return _context.Entreprises != null ? 
-                          View(await _context.Entreprises.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Entreprises'  is null.");
+            var Entreprises = await _EntrepriseService.GetAllEntreprisesAsync();
+            return View(Entreprises);
         }
 
         // GET: Entreprises/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Entreprises == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var entreprise = await _context.Entreprises
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (entreprise == null)
+            var Entreprise = await _EntrepriseService.GetEntrepriseByIdAsync(id.Value);
+
+            if (Entreprise == null)
             {
                 return NotFound();
             }
 
-            return View(entreprise);
+            return View(Entreprise);
         }
 
-        // GET: Entreprises/Create
         [Authorize]
+        // GET: Entreprises/Create
         public IActionResult Create()
         {
             return View();
@@ -55,46 +55,48 @@ namespace AlimBio.Controllers.WEB
 
         // POST: Entreprises/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Siren,NomEntreprise,DescriptionActivite,PersonneMoral,SiretSiege,Nic,NumeroVoie,LibelleVoie,ComplementAdresse,AdresseComplet,CodePostal,Ville,Region,Lattitude,Langitude,DateCreation,EntrepriseEmployeuse,Capital,Effectif,InscritRcs,SiteWeb,ImmatriculationTva")] Entreprise entreprise)
+        public async Task<IActionResult> Create([Bind("Id,NomEntreprise,CodePostal")] Entreprise Entreprise)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(entreprise);
-                await _context.SaveChangesAsync();
+                await _EntrepriseService.CreateEntrepriseAsync(Entreprise);
                 return RedirectToAction(nameof(Index));
             }
-            return View(entreprise);
+            return View(Entreprise);
         }
+
         [Authorize]
         // GET: Entreprises/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Entreprises == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var entreprise = await _context.Entreprises.FindAsync(id);
-            if (entreprise == null)
+            var Entreprise = await _EntrepriseService.GetEntrepriseByIdAsync(id.Value);
+
+            if (Entreprise == null)
             {
                 return NotFound();
             }
-            return View(entreprise);
+
+            return View(Entreprise);
         }
 
         // POST: Entreprises/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see <http://go.microsoft.com/fwlink/?LinkId=317598>.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Siren,NomEntreprise,DescriptionActivite,PersonneMoral,SiretSiege,Nic,NumeroVoie,LibelleVoie,ComplementAdresse,AdresseComplet,CodePostal,Ville,Region,Lattitude,Langitude,DateCreation,EntrepriseEmployeuse,Capital,Effectif,InscritRcs,SiteWeb,ImmatriculationTva")] Entreprise entreprise)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomEntreprise,CodePostal")] Entreprise Entreprise)
         {
-            if (id != entreprise.Id)
+            if (id != Entreprise.Id)
             {
                 return NotFound();
             }
@@ -103,12 +105,11 @@ namespace AlimBio.Controllers.WEB
             {
                 try
                 {
-                    _context.Update(entreprise);
-                    await _context.SaveChangesAsync();
+                    await _EntrepriseService.UpdateEntrepriseAsync(Entreprise);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EntrepriseExists(entreprise.Id))
+                    if (!await EntrepriseExists(Entreprise.Id))
                     {
                         return NotFound();
                     }
@@ -119,26 +120,31 @@ namespace AlimBio.Controllers.WEB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(entreprise);
+            return View(Entreprise);
         }
 
-        [Authorize]
+        private Task<bool> EntrepriseExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: Entreprises/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Entreprises == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var entreprise = await _context.Entreprises
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (entreprise == null)
+            var Entreprise = await _EntrepriseService.GetEntrepriseByIdAsync(id.Value);
+
+            if (Entreprise == null)
             {
                 return NotFound();
             }
 
-            return View(entreprise);
+            return View(Entreprise);
         }
 
         // POST: Entreprises/Delete/5
@@ -147,23 +153,17 @@ namespace AlimBio.Controllers.WEB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Entreprises == null)
+            var Entreprise = await _EntrepriseService.GetEntrepriseByIdAsync(id);
+
+            if (Entreprise == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Entreprises'  is null.");
+                return NotFound();
             }
-            var entreprise = await _context.Entreprises.FindAsync(id);
-            if (entreprise != null)
-            {
-                _context.Entreprises.Remove(entreprise);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _EntrepriseService.DeleteEntrepriseAsync(Entreprise.Id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EntrepriseExists(int id)
-        {
-          return (_context.Entreprises?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }
